@@ -36,7 +36,20 @@
 
     end samples -->
 
-    <definition name="${YOUR_DEFINITION_HERE}">
+    <definition name="index.page" path="/pages/layouts/main-layout.jsp">
+        <put name="header" value="/pages/tiles/header.jsp"/>
+        <put name="menu" value="/pages/tiles/menu.jsp"/>
+        <put name="body" value="/pages/tiles/welcome.jsp"/>
+        <put name="footer" value="/pages/tiles/footer.jsp"/>
+    </definition>
+    <definition name="newslist.page" extends="index.page">
+        <put name="body" value="/pages/tiles/newslist.jsp"/>
+    </definition>
+    <definition name="newsxiew.page" extends="index.page">
+        <put name="body" value="/pages/tiles/newsview.jsp"/>
+    </definition>
+    <definition name="newsedit.page" extends="index.page">
+        <put name="body" value="/pages/tiles/newsedit.jsp"/>
     </definition>
 
 </tiles-definitions>
