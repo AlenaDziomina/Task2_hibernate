@@ -7,7 +7,7 @@
 
 <struts-config>
     <form-beans>
-    
+        <form-bean name="newsForm" type="com.epam.testapp.presentation.form.NewsForm"/>
     </form-beans>
     
     <global-exceptions>
@@ -15,17 +15,33 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="newslist"  path="/newslist.do"/>
+        <forward name="newsview" path="/newsview.do"/>
     </global-forwards>
 
     <action-mappings>
         <action path="/Welcome" forward="/welcomeStruts.jsp"/>
         <action path="/index" forward="index.page"/>
+        <action path="/newslist" type="com.epam.testapp.presentation.action.NewsListAction" input="index.page">
+            <forward name="success" path="newslist.page"/>
+        </action>
+        
+        <action path="/newsview" type="com.epam.testapp.presentation.action.NewsViewAction" input="index.page">
+            <forward name="success" path="newsview.page"/>
+        </action>
+        
+        <action path="/newsedit" forward="newsedit.page"/>
+        
+        <action path="/savenews" type = "com.epam.testapp.presentation.action.SaveNewsAction" name="newsForm" input="index.page">
+            <forward name="failure" path="newsedit.page"/>
+        </action>
+
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
 
-    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    <message-resources parameter="com/myapp/struts/ApplicationResource" null="false"/>    
+    
     
     <!-- ========================= Tiles plugin ===============================-->
     <!--

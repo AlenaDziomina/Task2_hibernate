@@ -22,22 +22,34 @@
     </global>
 
     <formset>
-
-        <!-- An example form -->
-        <form name="logonForm">
-            <field
-                property="username"
-                depends="required">
-                    <arg key="logonForm.username"/>
+        <form name="newsForm">
+            <field property="title" depends="required, maxlength">
+                <arg0 key="news.title"/>
+                <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>100</var-value>
+		</var>
             </field>
-            <field
-                property="password"
-                depends="required,mask">
-                    <arg key="logonForm.password"/>
-                    <var>
-                        <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
-                    </var>
+            <field property="date" depends="required, date">
+                <arg0 key="news.date"/>
+                <var><var-name>datePattern</var-name><var-value>MM/dd/yyyy</var-value></var>
+            </field>
+            <field property="brief" depends="required, maxlength">
+                <arg0 key="news.brief"/>
+                <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>500</var-value>
+		</var>
+            </field>
+            <field property="content" depends="required, maxlength">
+                <arg0 key="news.content"/>
+                <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>2048</var-value>
+		</var>
             </field>
         </form>
 

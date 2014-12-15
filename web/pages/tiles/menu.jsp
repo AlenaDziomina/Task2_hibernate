@@ -13,7 +13,7 @@
 </div>
 <div class="menulist">
     <ul type="disc">
-        <li><bean:message key="menu.label.list"/></li>
-        <li><bean:message key="menu.label.add"/></li>
+        <li><a href="newslist.do"><bean:message key="menu.label.list"/></a></li>
+        <li><a href="newsedit.do"><bean:message key="menu.label.add"/></a></li>
     </ul>
 </div>

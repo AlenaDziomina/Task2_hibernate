@@ -45,7 +45,7 @@
     <definition name="newslist.page" extends="index.page">
         <put name="body" value="/pages/tiles/newslist.jsp"/>
     </definition>
-    <definition name="newsxiew.page" extends="index.page">
+    <definition name="newsview.page" extends="index.page">
         <put name="body" value="/pages/tiles/newsview.jsp"/>
     </definition>
     <definition name="newsedit.page" extends="index.page">

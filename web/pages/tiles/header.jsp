@@ -6,4 +6,4 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-<h1><bean:message key="welcome.title"/></h1>
+<h1><a href="index.do"><bean:message key="welcome.title"/></a></h1>
