@@ -23,7 +23,7 @@
 
     <formset>
         <form name="newsForm">
-            <field property="title" depends="required, maxlength">
+            <field property="newsMessage.title" depends="required, maxlength">
                 <arg0 key="news.title"/>
                 <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
                 <var>
@@ -31,11 +31,11 @@
                     <var-value>100</var-value>
 		</var>
             </field>
-            <field property="date" depends="required, date">
+            <field property="stringDate" depends="required, date">
                 <arg0 key="news.date"/>
                 <var><var-name>datePattern</var-name><var-value>MM/dd/yyyy</var-value></var>
             </field>
-            <field property="brief" depends="required, maxlength">
+            <field property="newsMessage.brief" depends="required, maxlength">
                 <arg0 key="news.brief"/>
                 <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
                 <var>
@@ -43,7 +43,7 @@
                     <var-value>500</var-value>
 		</var>
             </field>
-            <field property="content" depends="required, maxlength">
+            <field property="newsMessage.content" depends="required, maxlength">
                 <arg0 key="news.content"/>
                 <arg name="maxlength" key="${var:maxlength}" position="1" resource="false"/>
                 <var>

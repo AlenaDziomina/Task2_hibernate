@@ -40,20 +40,20 @@ public class NewsListAction extends org.apache.struts.action.Action {
             throws Exception {
 
 
-        List list = new ArrayList();
-        NewsForm newsForm1 = new NewsForm();
-        newsForm1.setTitle("title3");
-        newsForm1.setDate("03/03/2015");
-        newsForm1.setBrief("brief3");
-        newsForm1.setContent("content3");
-        NewsForm newsForm2 = new NewsForm();
-        newsForm2.setTitle("title4");
-        newsForm2.setDate("04/04/2015");
-        newsForm2.setBrief("brief4");
-        newsForm2.setContent("content4");
-        list.add(newsForm1);
-        list.add(newsForm2);
-        request.setAttribute("resultNewsList", list);
+//        List list = new ArrayList();
+//        NewsForm newsForm1 = new NewsForm();
+//        newsForm1.setTitle("title3");
+//        newsForm1.setDate("03/03/2015");
+//        newsForm1.setBrief("brief3");
+//        newsForm1.setContent("content3");
+//        NewsForm newsForm2 = new NewsForm();
+//        newsForm2.setTitle("title4");
+//        newsForm2.setDate("04/04/2015");
+//        newsForm2.setBrief("brief4");
+//        newsForm2.setContent("content4");
+//        list.add(newsForm1);
+//        list.add(newsForm2);
+//        request.setAttribute("resultNewsList", list);
 
         return mapping.findForward(SUCCESS);
     }

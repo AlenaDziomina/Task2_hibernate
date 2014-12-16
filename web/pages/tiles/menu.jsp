@@ -6,14 +6,14 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
 <div class="menuheader">
     <h2><bean:message key="menu.header"/></h2>
 </div>
 <div class="menulist">
     <ul type="disc">
-        <li><a href="newslist.do"><bean:message key="menu.label.list"/></a></li>
-        <li><a href="newsedit.do"><bean:message key="menu.label.add"/></a></li>
+        <li><html:link action="/newsaction.do?action=list"><bean:message key="menu.label.list"/></html:link></li>
+        <li><html:link action="/newsaction.do?action=add"><bean:message key="menu.label.add"/></html:link></li>
     </ul>
 </div>

@@ -42,12 +42,12 @@ public class NewsViewAction extends org.apache.struts.action.Action {
             newsForm = new NewsForm();
 
         }
-        String str = (String) request.getParameter("selectId");
-        if ("title3".equals(str)) {
-            newsForm.setTitle(str);
-        } else {
-            newsForm.setTitle(str);
-        }
+//        String str = (String) request.getParameter("selectId");
+//        if ("title3".equals(str)) {
+//            newsForm.setTitle(str);
+//        } else {
+//            newsForm.setTitle(str);
+//        }
         return mapping.findForward(SUCCESS);
     }
 }

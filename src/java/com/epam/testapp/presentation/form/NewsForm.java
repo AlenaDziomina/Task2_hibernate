@@ -6,6 +6,13 @@
 
 package com.epam.testapp.presentation.form;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
@@ -13,65 +20,118 @@ import org.apache.struts.validator.ValidatorForm;
  * @author Alena.Grouk
  */
 public class NewsForm extends ValidatorForm {
-    private String title;
-    private String date;
-    private String brief;
-    private String content;
+    private News newsMessage;
+    private List newsList;
+    private String stringDate;
+    private Locale locale;
+    private String forwardName;
+    private HashMap selectedId;
 
+    @Override
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        newsMessage = new News();
+        newsMessage.setId(1);
+        newsMessage.setTitle("unnTitle");
+        newsMessage.setBrief("unnBrief");
+        newsMessage.setContent("unnContent");
+        newsMessage.setDate(new Date());
+        newsList = new ArrayList();
+        newsList.add(newsMessage);
+        stringDate = "11/11/2015";
+        locale = new Locale("RU");
+        selectedId = new HashMap();
+    }
+    
     /**
-     * @return the title
+     * @return the newsList
      */
-    public String getTitle() {
-        return title;
+    public List getNewsList() {
+        return newsList;
     }
 
     /**
-     * @param title the title to set
+     * @param newsList the newsList to set
      */
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNewsList(List newsList) {
+        this.newsList = newsList;
     }
 
     /**
-     * @return the date
+     * @return the locale
      */
-    public String getDate() {
-        return date;
+    public Locale getLocale() {
+        return locale;
     }
 
     /**
-     * @param date the date to set
+     * @param locale the locale to set
      */
-    public void setDate(String date) {
-        this.date = date;
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
     /**
-     * @return the brief
+     * @return the stringDate
      */
-    public String getBrief() {
-        return brief;
+    public String getStringDate() {
+        return stringDate;
     }
 
     /**
-     * @param brief the brief to set
+     * @param stringDate the stringDate to set
      */
-    public void setBrief(String brief) {
-        this.brief = brief;
+    public void setStringDate(String stringDate) {
+        this.stringDate = stringDate;
+    }
+    
+    
+    /**
+     * @return the newsMessage
+     */
+    public News getNewsMessage() {
+        return newsMessage;
     }
 
     /**
-     * @return the content
+     * @param newsMessage the newsMessage to set
      */
-    public String getContent() {
-        return content;
+    public void setNewsMessage(News newsMessage) {
+        this.newsMessage = newsMessage;
     }
 
     /**
-     * @param content the content to set
+     * @return the forwardName
      */
-    public void setContent(String content) {
-        this.content = content;
+    public String getForwardName() {
+        return forwardName;
+    }
+
+    /**
+     * @param forwardName the forwardName to set
+     */
+    public void setForwardName(String forwardName) {
+        this.forwardName = forwardName;
+    }
+
+    /**
+     * @return the selectedId
+     */
+    public HashMap getSelectedId() {
+        return selectedId;
+    }
+
+    /**
+     * @param selectedId the selectedId to set
+     */
+    public void setSelectedId(HashMap selectedId) {
+        this.selectedId = selectedId;
+    }
+    
+    /**
+     * @param selectedId the selectedId to set
+     */
+    public void setSelectedId(String selectedId) {
+        this.selectedId.put(selectedId, selectedId);
     }
 
 }
