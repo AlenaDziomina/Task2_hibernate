@@ -30,20 +30,6 @@
             <forward name="newsedit" path="newsedit.page"/>
         </action>
         
-        <action path="/newslist" type="com.epam.testapp.presentation.action.NewsListAction" input="index.page">
-            <forward name="success" path="newslist.page"/>
-        </action>
-        
-        <action path="/newsview" type="com.epam.testapp.presentation.action.NewsViewAction" input="index.page">
-            <forward name="success" path="newsview.page"/>
-        </action>
-        
-        <action path="/newsedit" forward="newsedit.page"/>
-        
-        <action path="/savenews" validate="false" type = "com.epam.testapp.presentation.action.SaveNewsAction" name="newsForm" input="index.page">
-            <forward name="failure" path="newsedit.page"/>
-        </action>
-
     </action-mappings>
     
     <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
@@ -81,9 +67,6 @@
     <plug-in className="org.apache.struts.tiles.TilesPlugin" >
         <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
         <set-property property="moduleAware" value="true" />
-    </plug-in>
-    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
-        <set-property property="contextConfigLocation" value="/WEB-INF/application-context.xml"/>
     </plug-in>
     
     <!-- ========================= Validator plugin ================================= -->

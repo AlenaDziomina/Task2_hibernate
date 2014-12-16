@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class NewsDAO implements INewsDAO {
 
-    private final List newsList = new ArrayList();
+    private final List<News> newsList = new ArrayList();
     private int index = 0;
     
     @Override
@@ -40,7 +40,12 @@ public class NewsDAO implements INewsDAO {
 
     @Override
     public News fetchById(Integer id) {
-        return (News) newsList.get(id);
+        for (News news : newsList) {
+            if (news.getId() == id) {
+                return (News) news;
+            }
+        }
+        return null;
     }
     
 }

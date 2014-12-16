@@ -11,8 +11,8 @@
 
     <table>
         <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
-        <tr><td><bean:message key="news.title"/></td><td><bean:write name="newsForm" property="title" /></td></tr>   
-        <tr><td><bean:message key="news.date"/></td><td><bean:write name="newsForm" property="date" /></td></tr>
-        <tr><td><bean:message key="news.brief"/></td><td><bean:write name="newsForm" property="brief" /></td></tr>
-        <tr><td><bean:message key="news.content"/></td><td><bean:write name="newsForm" property="content" /></td></tr>
+        <tr><td><bean:message key="news.title"/></td><td><bean:write name="newsForm" property="newsMessage.title" /></td></tr>   
+        <tr><td><bean:message key="news.date"/></td><td><bean:write name="newsForm" property="newsMessage.date" /></td></tr>
+        <tr><td><bean:message key="news.brief"/></td><td><bean:write name="newsForm" property="newsMessage.brief" /></td></tr>
+        <tr><td><bean:message key="news.content"/></td><td><bean:write name="newsForm" property="newsMessage.content" /></td></tr>
     </table>

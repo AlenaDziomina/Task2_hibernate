@@ -25,7 +25,7 @@ public class NewsForm extends ValidatorForm {
     private String stringDate;
     private Locale locale;
     private String forwardName;
-    private HashMap selectedId;
+    private String selectedId;
 
     @Override
     public void reset(ActionMapping mapping, HttpServletRequest request) {
@@ -39,7 +39,7 @@ public class NewsForm extends ValidatorForm {
         newsList.add(newsMessage);
         stringDate = "11/11/2015";
         locale = new Locale("RU");
-        selectedId = new HashMap();
+        setSelectedId("0");
     }
     
     /**
@@ -116,23 +116,17 @@ public class NewsForm extends ValidatorForm {
     /**
      * @return the selectedId
      */
-    public HashMap getSelectedId() {
+    public String getSelectedId() {
         return selectedId;
     }
 
     /**
      * @param selectedId the selectedId to set
      */
-    public void setSelectedId(HashMap selectedId) {
+    public void setSelectedId(String selectedId) {
         this.selectedId = selectedId;
     }
-    
-    /**
-     * @param selectedId the selectedId to set
-     */
-    public void setSelectedId(String selectedId) {
-        this.selectedId.put(selectedId, selectedId);
-    }
+
 
 }
 

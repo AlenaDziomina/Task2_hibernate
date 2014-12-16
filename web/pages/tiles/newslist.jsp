@@ -18,7 +18,7 @@
         <tr><td><bean:write name="iter" property="brief"/></td></tr>
         <tr><td></td><td>
         <html:link action="/newsaction.do?action=edit" 
-                   paramId="selectedId" paramName="iter" paramProperty="id" onclick="addSelectedId()">
+                   paramId="selectedId" paramName="iter" paramProperty="id">
             <bean:message key="label.edit"/></html:link>        
 
         <html:link action="/newsaction.do?action=edit&selected=<bean:write name='iter' property='title'/>"><bean:message key="label.edit"/></html:link>
