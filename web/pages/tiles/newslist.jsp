@@ -26,7 +26,7 @@
                 <html:link action="/newsaction.do?action=view"
                             paramId="selectedId" paramName="iter" paramProperty="id">
                     <bean:message key="label.view"/></html:link>
-                <html:multibox property="deletedId" onchange="chechIsSelected(deletedId)">
+                <html:multibox property="deletedId" onchange="chechIsSelected('deletedId')">
                     <bean:write name="iter" property="id"/></html:multibox>
                         <bean:write name="iter" property="id"/>
                 </td></tr>

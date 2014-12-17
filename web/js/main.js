@@ -6,13 +6,13 @@
 
 function chechIsSelected(boxName){
     var elem = document.getElementsByTagName('input');
-    var flag = true;
+    var flag = false;
     var button;
     var i = 0;
-    while (flag && i < elem.length) {
-        var e = elem[i].name;
+    while (i < elem.length) {
+        var e = elem[i];
         if (elem[i].name === boxName) {
-            flag = elem[i].checked;
+            flag |= elem[i].checked;
         } else {
             if (elem[i].type === "submit") {
                 button = elem[i];
@@ -20,6 +20,10 @@ function chechIsSelected(boxName){
         }
         i++;
     }
-    
-    
+    if (flag) {
+        button.disabled = false;
+    } else {
+        button.disabled = true;
+    }
+
 }
