@@ -41,7 +41,7 @@ public class NewsForm extends ValidatorForm {
         stringDate = "11/11/2015";
         locale = new Locale("RU");
         setSelectedId("0");
-        setDeletedId(new String[]{"0"});
+        //setDeletedId(new String[]{"0"});
         
     }
     
@@ -144,7 +144,7 @@ public class NewsForm extends ValidatorForm {
         if (deletedId.length > 0) {
             this.deletedId = deletedId;
         } else {
-            this.deletedId = new String[]{"0"};
+            //this.deletedId = new String[]{"0"};
         }
     }
 

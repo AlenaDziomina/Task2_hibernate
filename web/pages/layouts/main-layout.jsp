@@ -12,6 +12,7 @@
     <head>
         <title><bean:message key="welcome.title"/></title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css"/>
+        <script src="<%=request.getContextPath()%>/js/main.js"></script>
     </head>
     
     <body>
