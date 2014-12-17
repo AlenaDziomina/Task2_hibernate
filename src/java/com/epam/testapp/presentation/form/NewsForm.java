@@ -25,8 +25,10 @@ public class NewsForm extends ValidatorForm {
     private Locale locale;
     private String forwardName;
     private String selectedId;
+    private String[] deletedId;
 
     @Override
+    @SuppressWarnings("empty-statement")
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         newsMessage = new News();
         newsMessage.setId(1);
@@ -39,6 +41,8 @@ public class NewsForm extends ValidatorForm {
         stringDate = "11/11/2015";
         locale = new Locale("RU");
         setSelectedId("0");
+        setDeletedId(new String[]{"0"});
+        
     }
     
     /**
@@ -126,6 +130,26 @@ public class NewsForm extends ValidatorForm {
         this.selectedId = selectedId;
     }
 
+    /**
+     * @return the deletedId
+     */
+    public String[] getDeletedId() {
+        return deletedId;
+    }
 
+    /**
+     * @param deletedId the deletedId to set
+     */
+    public void setDeletedId(String[] deletedId) {
+        if (deletedId.length > 0) {
+            this.deletedId = deletedId;
+        } else {
+            this.deletedId = new String[]{"0"};
+        }
+    }
+
+    
+
+    
 }
 

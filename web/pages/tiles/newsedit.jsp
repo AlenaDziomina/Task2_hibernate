@@ -19,5 +19,4 @@
     </table>
     <html:submit><bean:message key="button.save"/></html:submit>
 </html:form>
-<input type="reset" value="" name="cancel" />
 <html:javascript formName="newsForm" staticJavascript="true"/>
