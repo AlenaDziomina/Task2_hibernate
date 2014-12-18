@@ -4,26 +4,39 @@
  * and open the template in the editor.
  */
 
-function chechIsSelected(boxName){
+function confirmSubmit(boxName, confirmMsg, errorMsg){
+    var flag = checkIsSelected(boxName);
+    if (flag) {
+        return confirmation(confirmMsg);
+    } else {
+        return errorMessage(errorMsg);
+    }
+}
+
+function errorMessage(errorMsg){
+    alert(errorMsg);
+    return false;
+}
+
+function confirmation(confirmMsg){
+    var agree=confirm(confirmMsg);
+    if(agree) {
+        return true;
+    } else {
+        return false;
+    } 				
+}
+
+function checkIsSelected(boxName){
     var elem = document.getElementsByTagName('input');
     var flag = false;
-    var button;
     var i = 0;
-    while (i < elem.length) {
+    while (!flag && i < elem.length) {
         var e = elem[i];
         if (elem[i].name === boxName) {
             flag |= elem[i].checked;
-        } else {
-            if (elem[i].type === "submit") {
-                button = elem[i];
-            }
         }
         i++;
     }
-    if (flag) {
-        button.disabled = false;
-    } else {
-        button.disabled = true;
-    }
-
+    return flag;
 }
