@@ -13,32 +13,35 @@
 
 
 <html:form action="/newsaction?action=delete">
+    <html:hidden property="forwardName" value="newslist"/>
+    
     <logic:notEmpty  name="newsForm" property="newsList">
-        <table cellpadding="8">
+        <table cellpadding="8" class="newstable">
             <logic:iterate id="iter" name="newsForm" property="newsList">
-                <tr><td><bean:write name="iter" property="title"/></td>
-                    <td><bean:write name="iter" property="date" format="MM/DD/YYYY"/></td></tr>
-                <tr><td><bean:write name="iter" property="brief"/></td></tr>
-                <tr><td></td><td>
-                <html:link action="/newsaction.do?action=edit" 
-                           paramId="selectedId" paramName="iter" paramProperty="id">
-                    <bean:message key="label.edit"/></html:link>        
-                <html:link action="/newsaction.do?action=view"
-                            paramId="selectedId" paramName="iter" paramProperty="id">
-                    <bean:message key="label.view"/></html:link>
-                <html:multibox property="deletedId" onchange="chechIsSelected('deletedId')">
-                    <bean:write name="iter" property="id"/></html:multibox>
-                        <bean:write name="iter" property="id"/>
-                </td></tr>
+                <tr><td class="mainrow"><bean:write name="iter" property="title"/></td>
+                    <td class="addrow"><bean:write name="iter" property="date" format="MM/DD/YYYY"/></td></tr>
+                <tr><td class="mainrow"><bean:write name="iter" property="brief"/></td></tr>
+                <tr><td class="addrow" colspan="2">
+                        <html:link action="/newsaction.do?action=edit" 
+                                   paramId="selectedId" paramName="iter" paramProperty="id">
+                            <bean:message key="label.edit"/></html:link>        
+                        <html:link action="/newsaction.do?action=view"
+                                    paramId="selectedId" paramName="iter" paramProperty="id">
+                            <bean:message key="label.view"/></html:link>
+                        <html:multibox property="deletedId" onchange="chechIsSelected('deletedId')">
+                            <bean:write name="iter" property="id"/></html:multibox>
+                                <bean:write name="iter" property="id"/>
+                    </td></tr>
             </logic:iterate>
         </table>
         
-        <html:submit disabled="true"><bean:message key="button.delete"/></html:submit>
-        
+        <html:submit disabled="true"><bean:message key="button.delete"/></html:submit>        
     </logic:notEmpty>
+    
     <logic:empty name="newsForm" property="newsList">
         <h5>News list is empty.</h5>
     </logic:empty>
+        
 </html:form>
 <html:javascript formName="newsForm" staticJavascript="true"/>
 

@@ -10,5 +10,11 @@
 
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <h1><a href="index.do"><bean:message key="welcome.title"/></a></h1>
+<div class="right">
+    <html:link action="/newsaction.do?action=locale&locale=EN">
+        <bean:message key="label.en"/></html:link> 
+    <html:link action="/newsaction.do?action=locale&locale=RU">
+        <bean:message key="label.ru"/></html:link> 
+</div>
 
 

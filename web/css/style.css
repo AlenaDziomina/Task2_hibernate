@@ -60,3 +60,20 @@ body {
 .menulist {
     background-color:  white;
 }
+
+.newstable {
+    width: 100%;
+}
+
+.mainrow {
+    width: 70%;
+}
+
+.addrow {
+    width: 30%;
+    text-align: right;
+}
+
+.right {
+    text-align: right;
+}

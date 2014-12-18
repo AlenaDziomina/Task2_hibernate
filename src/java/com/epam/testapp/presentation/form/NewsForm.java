@@ -9,7 +9,6 @@ package com.epam.testapp.presentation.form;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
@@ -22,7 +21,7 @@ public class NewsForm extends ValidatorForm {
     private News newsMessage;
     private List newsList;
     private String stringDate;
-    private Locale locale;
+    private String locale;
     private String forwardName;
     private String selectedId;
     private String[] deletedId;
@@ -39,9 +38,9 @@ public class NewsForm extends ValidatorForm {
         newsList = new ArrayList();
         newsList.add(newsMessage);
         stringDate = "11/11/2015";
-        locale = new Locale("RU");
+        //locale = new Locale("RU");
         setSelectedId("0");
-        //setDeletedId(new String[]{"0"});
+        setDeletedId(new String[0]);
         
     }
     
@@ -62,14 +61,14 @@ public class NewsForm extends ValidatorForm {
     /**
      * @return the locale
      */
-    public Locale getLocale() {
+    public String getLocale() {
         return locale;
     }
 
     /**
      * @param locale the locale to set
      */
-    public void setLocale(Locale locale) {
+    public void setLocale(String locale) {
         this.locale = locale;
     }
 
@@ -141,11 +140,8 @@ public class NewsForm extends ValidatorForm {
      * @param deletedId the deletedId to set
      */
     public void setDeletedId(String[] deletedId) {
-        if (deletedId.length > 0) {
             this.deletedId = deletedId;
-        } else {
-            //this.deletedId = new String[]{"0"};
-        }
+        
     }
 
     

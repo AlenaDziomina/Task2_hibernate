@@ -14,6 +14,5 @@
         logs for error messages.
     </div>
 </logic:notPresent>
-
 <h3><bean:message key="welcome.heading"/></h3>
 <p><bean:message key="welcome.message"/></p>

@@ -15,8 +15,10 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.struts.Globals;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -91,7 +93,7 @@ public class NewsAction extends DispatchAction {
             getNewsDao().remove(news);
         }
         newsForm.setNewsMessage(null);
-        return mapping.findForward("newslist");
+        return mapping.findForward(newsForm.getForwardName());
     }
     
     public ActionForward cancel(ActionMapping mapping, ActionForm form,
@@ -126,6 +128,14 @@ public class NewsAction extends DispatchAction {
         return mapping.findForward("newsedit");
     }
 
+     public ActionForward locale(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse responce)
+            throws Exception {
+        NewsForm newsForm = (NewsForm) form;
+        Locale locale = new Locale(newsForm.getLocale(), newsForm.getLocale());
+        request.getSession().setAttribute(Globals.LOCALE_KEY, locale);
+        return mapping.findForward("index");
+    }
     
 
 }
