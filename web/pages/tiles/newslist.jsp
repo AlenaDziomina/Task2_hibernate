@@ -35,7 +35,7 @@
                                 formatKey="format.date"/></td></tr>
                 <tr><td class="mainrow"><bean:write name="iter" property="brief"/></td></tr>
                 <tr><td class="addrow" colspan="2">
-                        <html:link action="/newsaction.do?action=edit" 
+                        <html:link action="/newsaction?action=edit" 
                                    paramId="selectedId" paramName="iter" paramProperty="id">
                             <bean:message key="label.edit"/></html:link>        
                         <html:link action="/newsaction.do?action=view"
@@ -46,9 +46,11 @@
                                 <bean:write name="iter" property="id"/>
                     </td></tr>
             </logic:iterate>
+            <tr><td class="addrow" colspan="2">
+                <html:submit><bean:message key="button.delete"/></html:submit></td></tr>
         </table>
 
-        <html:submit><bean:message key="button.delete"/></html:submit>        
+              
     </logic:notEmpty>
     
     <logic:empty name="newsForm" property="newsList">

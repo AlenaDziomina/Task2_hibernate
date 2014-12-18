@@ -36,13 +36,7 @@ public class NewsDAO implements INewsDAO {
 
     @Override
     public void remove(List<Integer> idList) {
-        for (News news : newsList) {
-            for (Integer id : idList) {
-                if (Objects.equals(news.getId(), id)) {
-                    newsList.remove(news);
-                }
-            }
-        }
+        newsList.clear();
     }
 
     @Override

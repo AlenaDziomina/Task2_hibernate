@@ -37,7 +37,7 @@ public class NewsForm extends ValidatorForm {
         newsMessage.setDate(new Date());
         newsList = new ArrayList();
         newsList.add(newsMessage);
-        stringDate = "11/11/2015";
+        //stringDate = "11/11/2015";
         //locale = new Locale("RU");
         setSelectedId("0");
         setDeletedId(new String[0]);

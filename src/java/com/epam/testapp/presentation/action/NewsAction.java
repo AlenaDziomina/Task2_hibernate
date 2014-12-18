@@ -32,7 +32,6 @@ import org.apache.struts.actions.DispatchAction;
 public class NewsAction extends DispatchAction {
     private static final String FORWARD_INDEX = "index";
     private static final String FORWARD_NEWSLIST = "newslist";
-    private static final String FORWARD_NEWSLIST_RELOAD = "newslistreload";
     private static final String FORWARD_NEWSEDIT = "newsedit";
     private static final String FORWARD_NEWSVIEW = "newsview";
     
@@ -90,13 +89,15 @@ public class NewsAction extends DispatchAction {
             idList.add(Integer.decode(strId));
         }
         getNewsDao().remove(idList);
-        return mapping.findForward(FORWARD_NEWSLIST_RELOAD);
+        getNewsDao().getList();
+        newsForm.setNewsList(getNewsDao().getList());
+        return mapping.findForward(FORWARD_NEWSLIST);
     }
     
     public ActionForward cancel(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
-//        NewsForm newsForm = (NewsForm) form;
+        NewsForm newsForm = (NewsForm) form;
 //        newsForm.setNewsMessage(null);
         return mapping.findForward(FORWARD_NEWSLIST);
     }
@@ -120,10 +121,9 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         Date date = new Date();
-//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-//        String strDate = formatter.format(date);
-//        date = formatter.parse(strDate);
-        newsForm.getNewsMessage().setDate(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strDate = formatter.format(date);
+        newsForm.setStringDate(strDate);
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
 

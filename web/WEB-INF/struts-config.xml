@@ -16,7 +16,6 @@
 
     <global-forwards>
         <forward name="index" path="index.page"/>
-        <forward name="newslistreload"  path="/newslist.do"/>
         <forward name="newsview" path="/newsview.do"/>
     </global-forwards>
 
