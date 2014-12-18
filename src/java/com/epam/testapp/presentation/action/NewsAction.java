@@ -89,8 +89,8 @@ public class NewsAction extends DispatchAction {
             idList.add(Integer.decode(strId));
         }
         getNewsDao().remove(idList);
-        getNewsDao().getList();
-        newsForm.setNewsList(getNewsDao().getList());
+//        getNewsDao().getList();
+//        newsForm.setNewsList(getNewsDao().getList());
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
@@ -99,7 +99,7 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
 //        newsForm.setNewsMessage(null);
-        return mapping.findForward(FORWARD_NEWSLIST);
+        return mapping.findForward(newsForm.getForwardName());
     }
     
     public ActionForward save(ActionMapping mapping, ActionForm form,
@@ -124,6 +124,7 @@ public class NewsAction extends DispatchAction {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strDate = formatter.format(date);
         newsForm.setStringDate(strDate);
+        newsForm.setForwardName("index");
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
 

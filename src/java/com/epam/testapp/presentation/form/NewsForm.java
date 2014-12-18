@@ -30,17 +30,17 @@ public class NewsForm extends ValidatorForm {
     @SuppressWarnings("empty-statement")
     public void reset(ActionMapping mapping, HttpServletRequest request) {
         newsMessage = new News();
-        newsMessage.setId(1);
-        newsMessage.setTitle("unnTitle");
-        newsMessage.setBrief("unnBrief");
-        newsMessage.setContent("unnContent");
-        newsMessage.setDate(new Date());
-        newsList = new ArrayList();
-        newsList.add(newsMessage);
+//        newsMessage.setId(1);
+//        newsMessage.setTitle("unnTitle");
+//        newsMessage.setBrief("unnBrief");
+//        newsMessage.setContent("unnContent");
+//        newsMessage.setDate(new Date());
+        //newsList = new ArrayList();
+//        newsList.add(newsMessage);
         //stringDate = "11/11/2015";
         //locale = new Locale("RU");
-        setSelectedId("0");
-        setDeletedId(new String[0]);
+//        setSelectedId("0");
+        //setDeletedId(new String[0]);
         
     }
     
