@@ -12,10 +12,17 @@
 <html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
     <table>
         <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
-        <tr><td><bean:message key="news.title"/></td><td><html:text property="newsMessage.title" value="title1"/></td></tr>   
-        <tr><td><bean:message key="news.date"/></td><td><html:text property="stringDate" value="01/01/2015"/></td></tr>
-        <tr><td><bean:message key="news.brief"/></td><td><html:textarea property="newsMessage.brief" value="brief1"/></td></tr>
-        <tr><td><bean:message key="news.content"/></td><td><html:textarea property="newsMessage.content" value="content1"/></td></tr>
+        <tr><td><bean:message key="news.title"/></td><td>
+                <html:text property="newsMessage.title" value="title1"/></td></tr>   
+        <tr><td><bean:message key="news.date"/></td><td>
+                <html:text property="stringDate">
+                    <bean:write name="newsForm" property="newsMessage.date" 
+                                formatKey="format.date"/>
+                </html:text></td></tr>
+        <tr><td><bean:message key="news.brief"/></td><td>
+                <html:textarea property="newsMessage.brief" value="brief1"/></td></tr>
+        <tr><td><bean:message key="news.content"/></td><td>
+                <html:textarea property="newsMessage.content" value="content1"/></td></tr>
     </table>
     <html:submit><bean:message key="button.save"/></html:submit>
 </html:form>

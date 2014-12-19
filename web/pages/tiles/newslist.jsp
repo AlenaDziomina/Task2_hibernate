@@ -18,7 +18,8 @@
     <bean:message key="errors.confirmation"/>
 </bean:define>
 
-<html:form action="/newsaction?action=delete" onsubmit="return confirmSubmit('deletedId', '${confirmMessage}', '${errMessage}')">
+<html:form action="/newsaction?action=delete" 
+           onsubmit="return confirmSubmit('deletedId', '${confirmMessage}', '${errMessage}')">
     <html:hidden property="forwardName" value="newslist"/>
     
     <logic:notEmpty  name="newsForm" property="newsList">
@@ -30,7 +31,8 @@
                 <tr><td id="<bean:write name="iter" property="id"/>" class="mainrow">
                         <bean:write name="tmpMod"/> . 
                         <bean:write name="iter" property="title"/></td>
-                    <td class="addrow"><bean:write name="iter" property="date" format="MM/DD/YYYY"/></td></tr>
+                    <td class="addrow"><bean:write name="iter" property="date" 
+                                formatKey="format.date"/></td></tr>
                 <tr><td class="mainrow"><bean:write name="iter" property="brief"/></td></tr>
                 <tr><td class="addrow" colspan="2">
                         <html:link action="/newsaction.do?action=edit" 

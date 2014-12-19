@@ -16,7 +16,7 @@ import java.util.List;
 public interface INewsDAO {
     public List getList();
     public void save(News news);
-    public void remove(News news);
+    public void remove(List<Integer> idList);
     public News fetchById(Integer id);
     
 }

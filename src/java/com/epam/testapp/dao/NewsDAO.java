@@ -9,6 +9,7 @@ package com.epam.testapp.dao;
 import com.epam.testapp.presentation.form.News;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -34,8 +35,14 @@ public class NewsDAO implements INewsDAO {
     }
 
     @Override
-    public void remove(News news) {
-        newsList.remove(news);
+    public void remove(List<Integer> idList) {
+        for (News news : newsList) {
+            for (Integer id : idList) {
+                if (Objects.equals(news.getId(), id)) {
+                    newsList.remove(news);
+                }
+            }
+        }
     }
 
     @Override
