@@ -5,5 +5,16 @@
     <bean name="/newsaction" 
         class="com.epam.testapp.presentation.action.NewsAction"
         singleton="true">
+        <property name="newsDao" ref="simpleNewsDao"></property>
+    </bean>
+    <bean id="simpleNewsDao" class="com.epam.testapp.dao.SimpleNewsDao"
+        singleton="true">
+    </bean>
+    <bean id="jdbcNewsDao" class="com.epam.testapp.dao.JdbcNewsDao"
+        singleton="true">
+        <property name="connectionPool" ref="jdbcConnectionPool"></property>
+    </bean>
+    <bean id="jdbcConnectionPool" class="com.epam.testapp.connection.JdbcConnectionPool"
+        singleton="true">
     </bean>
 </beans>

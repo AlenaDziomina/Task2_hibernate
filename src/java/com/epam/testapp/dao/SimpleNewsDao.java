@@ -15,7 +15,7 @@ import java.util.Objects;
  *
  * @author Alena_Grouk
  */
-public class NewsDAO implements INewsDAO {
+public class SimpleNewsDao implements INewsDao {
 
     private final List<News> newsList = new ArrayList();
     private int index = 0;

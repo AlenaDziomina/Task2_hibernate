@@ -6,8 +6,8 @@
 
 package com.epam.testapp.presentation.action;
 
-import com.epam.testapp.dao.INewsDAO;
-import com.epam.testapp.dao.NewsDAO;
+import com.epam.testapp.dao.INewsDao;
+import com.epam.testapp.dao.SimpleNewsDao;
 import com.epam.testapp.presentation.form.News;
 import com.epam.testapp.presentation.form.NewsForm;
 import java.text.ParseException;
@@ -35,19 +35,19 @@ public class NewsAction extends DispatchAction {
     private static final String FORWARD_NEWSEDIT = "newsedit";
     private static final String FORWARD_NEWSVIEW = "newsview";
     
-    private INewsDAO newsDao = new NewsDAO();
+    private INewsDao newsDao;
     
     /**
      * @return the newsDao
      */
-    public INewsDAO getNewsDao() {
+    public INewsDao getNewsDao() {
         return newsDao;
     }
 
     /**
      * @param newsDao the newsDao to set
      */
-    public void setNewsDao(INewsDAO newsDao) {
+    public void setNewsDao(INewsDao newsDao) {
         this.newsDao = newsDao;
     }
 
