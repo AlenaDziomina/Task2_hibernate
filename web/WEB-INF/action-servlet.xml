@@ -15,6 +15,24 @@
         <property name="connectionPool" ref="jdbcConnectionPool"></property>
     </bean>
     <bean id="jdbcConnectionPool" class="com.epam.testapp.connection.JdbcConnectionPool"
-        singleton="true">
+        singleton="true" init-method="init" destroy-method="destroy">
+        <property name="dbMaxConnections">
+            <value>20</value>
+        </property>
+        <property name="dbMaxIdleConnections">
+                <value>5</value>
+        </property>
+        <property name="dbUrl">
+                <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+        </property>
+        <property name="dbDriverName">
+                <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="dbUserName">
+                <value>alena</value>
+        </property>
+        <property name="dbPassword">
+                <value>alena</value>
+        </property>
     </bean>
 </beans>
