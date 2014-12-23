@@ -51,26 +51,26 @@ public class JdbcConnectionPool implements IConnectionPool {
         loadDriver();
         queue = new ArrayBlockingQueue<>(getDbMaxConnections());
         for (int i = 0; i < getDbMaxConnections(); i++) {
-            //queue.offer(createNewConnection());
+            queue.offer(createNewConnection());
         }
     }
     
     private void loadDriver() throws DaoConnectException {
-//        try {
-//            Class.forName(getDbDriverName());
-//        } catch (ClassNotFoundException ex) {
-//            throw new DaoConnectException("Driver not found.", ex);
-//        }
+        try {
+            Class.forName(getDbDriverName());
+        } catch (ClassNotFoundException ex) {
+            throw new DaoConnectException("Driver not found.", ex);
+        }
     }
     
     private ProxyConnection createNewConnection() throws DaoConnectException{
         ProxyConnection conn = null;
-//        try {
-//            Connection connection = (Connection) DriverManager.getConnection(getDbUrl(), getDbUserName(), getDbPassword());
-//            conn = new ProxyConnection(connection);
-//        } catch (SQLException ex) {
-//            throw new DaoConnectException("Connection not created.", ex);
-//        }
+        try {
+            Connection connection = (Connection) DriverManager.getConnection(getDbUrl(), getDbUserName(), getDbPassword());
+            conn = new ProxyConnection(connection);
+        } catch (SQLException ex) {
+            throw new DaoConnectException("Connection not created.", ex);
+        }
         return conn;
     }
     
