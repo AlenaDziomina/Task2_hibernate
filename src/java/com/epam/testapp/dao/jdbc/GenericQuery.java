@@ -69,14 +69,15 @@ public class GenericQuery implements IGenericQuery {
             ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             for (int i = 0; i < params.length; i++) {
                 ps.setObject(i + 1, params[i]);
-            }
-            if(ps.executeUpdate()>0){
-                rs = ps.getGeneratedKeys();
-                while (rs.next()){
-                    resultList.add(rs.getInt(1));
+                if(ps.executeUpdate()>0){
+                    rs = ps.getGeneratedKeys();
+                    while (rs.next()){
+                        resultList.add(rs.getInt(1));
+                    }
                 }
+                ps.clearParameters();
             }
-            ps.clearParameters();
+            
             return resultList;
         }
         catch (SQLException ex) {
