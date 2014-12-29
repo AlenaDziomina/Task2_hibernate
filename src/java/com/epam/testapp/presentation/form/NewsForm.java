@@ -6,7 +6,11 @@
 
 package com.epam.testapp.presentation.form;
 
+import com.epam.testapp.manager.DataManager;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
@@ -27,8 +31,10 @@ public class NewsForm extends ValidatorForm {
     private String[] deletedId;
     
     private static final int TITLE_MAXLENGTH = 100;
+    private static final int STRDATE_MAXLENGTH = 10;
     private static final int BRIEF_MAXLENGTH = 500;
     private static final int CONTENT_MAXLENGTH = 2048;
+    
 
     @Override
     @SuppressWarnings("empty-statement")
@@ -55,6 +61,7 @@ public class NewsForm extends ValidatorForm {
                     HttpServletRequest request) {
             ActionErrors actionErrors = new ActionErrors();
             validateTitle(actionErrors, newsMessage);
+            validateStringDate(actionErrors, stringDate);
             validateBrief(actionErrors, newsMessage);
             validateContent(actionErrors, newsMessage);
             return actionErrors;
@@ -186,6 +193,20 @@ public class NewsForm extends ValidatorForm {
                     new ActionMessage("errors.maxLength.content", CONTENT_MAXLENGTH));
         }
     }
-    
+
+    private void validateStringDate(ActionErrors errors, String stringDate) {
+        if ("".equals(stringDate)) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.strdate"));
+        } else if (stringDate.length() > STRDATE_MAXLENGTH) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.maxLength.strdate", STRDATE_MAXLENGTH));
+        } else {
+            try {
+                DataManager.toSqlDate(stringDate);
+            } catch (ParseException ex) {
+                errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.strdate.parse"));
+            }
+        }
+    }
 }
 

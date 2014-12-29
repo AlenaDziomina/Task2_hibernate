@@ -21,6 +21,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.DispatchAction;
 
 /**
@@ -112,9 +113,7 @@ public class NewsAction extends DispatchAction {
         }
         try {
             newsForm.getNewsMessage().setDate(DataManager.toSqlDate(newsForm.getStringDate()));
-        } catch (ParseException ex) {
-            return mapping.findForward(FORWARD_NEWSEDIT);
-        }
+        } catch (ParseException ex) {}
         
         getNewsDao().save(newsForm.getNewsMessage());
         return mapping.findForward(FORWARD_NEWSVIEW);
