@@ -6,11 +6,11 @@
 
 package com.epam.testapp.presentation.form;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
@@ -25,23 +25,39 @@ public class NewsForm extends ValidatorForm {
     private String forwardName;
     private String selectedId;
     private String[] deletedId;
+    
+    private static final int TITLE_MAXLENGTH = 100;
+    private static final int BRIEF_MAXLENGTH = 500;
+    private static final int CONTENT_MAXLENGTH = 2048;
 
     @Override
     @SuppressWarnings("empty-statement")
     public void reset(ActionMapping mapping, HttpServletRequest request) {
-        newsMessage = new News();
-//        newsMessage.setId(1);
+//        newsMessage = new News();
+//        newsList = new ArrayList();
+//        stringDate = "";
+//        selectedId = "";
+//        deletedId = new String[0];
+//        forwardName = "";
+//        newsMessage.setId(0);
 //        newsMessage.setTitle("unnTitle");
 //        newsMessage.setBrief("unnBrief");
 //        newsMessage.setContent("unnContent");
-//        newsMessage.setDate(new Date());
-        //newsList = new ArrayList();
+//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+//        stringDate = formatter.format(new Date());
+        //newsMessage.setDate();
 //        newsList.add(newsMessage);
-        //stringDate = "11/11/2015";
         //locale = new Locale("RU");
-//        setSelectedId("0");
-        //setDeletedId(new String[0]);
-        
+    }
+    
+    @Override
+    public ActionErrors validate(ActionMapping mapping,
+                    HttpServletRequest request) {
+            ActionErrors actionErrors = new ActionErrors();
+            validateTitle(actionErrors, newsMessage);
+            validateBrief(actionErrors, newsMessage);
+            validateContent(actionErrors, newsMessage);
+            return actionErrors;
     }
     
     /**
@@ -143,9 +159,33 @@ public class NewsForm extends ValidatorForm {
             this.deletedId = deletedId;
         
     }
-
     
-
+    private void validateTitle(ActionErrors errors, News newsMessage) {
+        if ("".equals(newsMessage.getTitle())) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.title"));
+        } else if (newsMessage.getTitle().length() > TITLE_MAXLENGTH) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.maxLength.title", TITLE_MAXLENGTH));
+        }
+    }
+    
+    private void validateBrief(ActionErrors errors, News newsMessage) {
+        if ("".equals(newsMessage.getBrief())) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.brief"));
+        } else if (newsMessage.getBrief().length() > BRIEF_MAXLENGTH) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.maxLength.brief", BRIEF_MAXLENGTH));
+        }
+    }
+    
+    private void validateContent(ActionErrors errors, News newsMessage) {
+        if ("".equals(newsMessage.getContent())) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.content"));
+        } else if (newsMessage.getContent().length() > CONTENT_MAXLENGTH) {
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.maxLength.content", CONTENT_MAXLENGTH));
+        }
+    }
     
 }
 

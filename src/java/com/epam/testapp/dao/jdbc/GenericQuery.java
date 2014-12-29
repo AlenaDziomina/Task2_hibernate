@@ -64,17 +64,11 @@ public class GenericQuery implements IGenericQuery {
         }
         List<Integer> resultList = new ArrayList<>();
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
-            ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            for (int i = 0; i < params.length; i++) {
-                ps.setObject(i + 1, params[i]);
-                if(ps.executeUpdate()>0){
-                    rs = ps.getGeneratedKeys();
-                    while (rs.next()){
-                        resultList.add(rs.getInt(1));
-                    }
-                }
+            ps = conn.prepareStatement(query);
+            for (Object param : params) {
+                ps.setObject(1, param);
+                ps.executeUpdate();
                 ps.clearParameters();
             }
             
@@ -84,9 +78,6 @@ public class GenericQuery implements IGenericQuery {
             throw new DaoException(ex.getMessage(), ex);
         } finally {
             try {
-                if (rs != null && !rs.isClosed()) {
-                    rs.close();
-                }
                 if (ps != null && !ps.isClosed()){
                     ps.close();
                 }

@@ -6,7 +6,7 @@
 
 package com.epam.testapp.presentation.form;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -18,6 +18,7 @@ public class News {
     private Date date;
     private String brief;
     private String content;
+    
 
     /**
      * @return the title

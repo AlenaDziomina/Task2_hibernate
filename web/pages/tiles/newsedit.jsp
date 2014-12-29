@@ -9,20 +9,24 @@
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 
 <a href="index.do"><bean:message key="menu.header"/></a> >> <bean:message key="menu.label.add"/>
-<html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
+<html:form action="/newsaction?action=save">
     <table class="newstable">
         <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
+
         <tr><td class="addrow"><bean:message key="news.title"/></td>
-            <td class="mainrow"><html:text property="newsMessage.title" value="title1" size="100"/></td></tr>   
+            <td class="mainrow"><html:text property="newsMessage.title" 
+                       size="100"/></td></tr>   
         <tr><td class="addrow"><bean:message key="news.date"/></td>
             <td class="mainrow"><html:text property="stringDate" size="10">
                     <bean:write name="newsForm" property="newsMessage.date" 
                                 formatKey="format.date"/>
                 </html:text></td></tr>
         <tr><td class="addrow"><bean:message key="news.brief"/></td>
-            <td class="mainrow"><html:textarea property="newsMessage.brief" value="brief1" cols="75" rows="5"/></td></tr>
+            <td class="mainrow"><html:textarea property="newsMessage.brief" 
+                           cols="75" rows="5"/></td></tr>
         <tr><td class="addrow"><bean:message key="news.content"/></td>
-            <td class="mainrow"><html:textarea property="newsMessage.content" value="content1" cols="75" rows="10"/></td></tr>
+            <td class="mainrow"><html:textarea property="newsMessage.content" 
+                           cols="75" rows="10"/></td></tr>
         <tr><td class="addrow"></td>
             <td class="mainrow">
                 <html:submit><bean:message key="button.save"/></html:submit>

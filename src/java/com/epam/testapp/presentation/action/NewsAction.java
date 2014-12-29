@@ -7,19 +7,17 @@
 package com.epam.testapp.presentation.action;
 
 import com.epam.testapp.dao.INewsDao;
-import com.epam.testapp.dao.SimpleNewsDao;
+import com.epam.testapp.manager.DataManager;
 import com.epam.testapp.presentation.form.News;
 import com.epam.testapp.presentation.form.NewsForm;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.Globals;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -30,6 +28,7 @@ import org.apache.struts.actions.DispatchAction;
  * @author Alena_Grouk
  */
 public class NewsAction extends DispatchAction {
+    
     private static final String FORWARD_INDEX = "index";
     private static final String FORWARD_NEWSLIST = "newslist";
     private static final String FORWARD_NEWSEDIT = "newsedit";
@@ -75,6 +74,7 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
         newsForm.setNewsMessage(getNewsDao().fetchById(id));
+        newsForm.setStringDate(DataManager.toFormatString(newsForm.getNewsMessage().getDate()));
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
     
@@ -89,8 +89,8 @@ public class NewsAction extends DispatchAction {
             idList.add(Integer.decode(strId));
         }
         getNewsDao().remove(idList);
-//        getNewsDao().getList();
-//        newsForm.setNewsList(getNewsDao().getList());
+        getNewsDao().getList();
+        newsForm.setNewsList(getNewsDao().getList());
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
@@ -98,7 +98,6 @@ public class NewsAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
-//        newsForm.setNewsMessage(null);
         return mapping.findForward(newsForm.getForwardName());
     }
     
@@ -106,11 +105,16 @@ public class NewsAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
+        ActionErrors errors = newsForm.validate(mapping, request);
+        if (!errors.isEmpty()) {
+            saveErrors(request, errors);
+            return mapping.findForward(FORWARD_NEWSEDIT);
+        }
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-            Date currDate = formatter.parse(newsForm.getStringDate());
-            newsForm.getNewsMessage().setDate(currDate);
-        } catch (ParseException ex) {}
+            newsForm.getNewsMessage().setDate(DataManager.toSqlDate(newsForm.getStringDate()));
+        } catch (ParseException ex) {
+            return mapping.findForward(FORWARD_NEWSEDIT);
+        }
         
         getNewsDao().save(newsForm.getNewsMessage());
         return mapping.findForward(FORWARD_NEWSVIEW);
@@ -120,15 +124,14 @@ public class NewsAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        String strDate = formatter.format(date);
-        newsForm.setStringDate(strDate);
-        newsForm.setForwardName("index");
+        newsForm.setNewsMessage(new News());
+        newsForm.getNewsMessage().setDate(DataManager.toSqlDate());
+        newsForm.setStringDate(DataManager.toFormatString(null));
+        newsForm.setForwardName(FORWARD_INDEX);
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
 
-     public ActionForward locale(ActionMapping mapping, ActionForm form,
+    public ActionForward locale(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;

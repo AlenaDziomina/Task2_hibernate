@@ -16,6 +16,10 @@ body {
     padding: 1%;
 }
 
+.errors {
+    color: red;
+}
+
 #header {
     background-color:  whitesmoke;
     border: 1px solid darkgrey;
