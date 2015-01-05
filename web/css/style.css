@@ -15,11 +15,39 @@ html {
 
 body {
     padding: 1%;
+    min-width: 800px;
+}
+
+#header {
+    background-color:  whitesmoke;
+    border: 1px solid darkgrey;
+    min-height: 4%;
+    text-align: left;
+    padding: 1%;
+}
+
+h1.titletext {
+    margin: 1% 1% 0 1%;
+    padding-left: 2%;
+}
+
+.title, .title:visited {
+    text-decoration: none;
+    color: navy;
+}
+
+.right {
+    text-align: right;
+}
+
+.constColor.blue, .constColor.blue:visited {
+    color: blue;
+    padding: 0 1% 0 1%;
 }
 
 h2.menuhead {
     margin: 0;
-    padding: 7px;
+    padding: 2%;
     color: white;
 }
 
@@ -31,14 +59,6 @@ textarea {
 
 .errors {
     color: red;
-}
-
-#header {
-    background-color:  whitesmoke;
-    border: 1px solid darkgrey;
-    min-height: 4%;
-    text-align: left;
-    padding: 0px 25px 15px 45px;
 }
 
 #main {
@@ -53,15 +73,6 @@ textarea {
     text-align: center;
 }
 
-.title, .title:visited {
-    text-decoration: none;
-    color: navy;
-}
-
-.constColor.blue, .constColor.blue:visited {
-    color: blue;
-}
-
 .constColor.grey, .constColor.grey:visited {
     color: silver;
 }
@@ -69,7 +80,7 @@ textarea {
 .menucontainer {
     width: 20%;
     background-color:  lightgrey;
-    padding: 20px 3px 40px 10px;
+    padding: 1.5% 0.5% 3% 1%;
     margin: 1%;
     float: left;
 }
@@ -81,8 +92,8 @@ textarea {
 
 .menulist {
     background-color:  white;
-    margin: 7px 5px 0px 40px;
-    padding: 5px 15px 20px 5px;
+    margin: 4% 3% 0 15%;
+    padding: 2% 4% 8% 2%;
 }
 
 .newstable {
@@ -111,9 +122,7 @@ textarea {
     vertical-align: top;
 }
 
-.right {
-    text-align: right;
-}
+
 
 .butSize {
     width: 100px;
