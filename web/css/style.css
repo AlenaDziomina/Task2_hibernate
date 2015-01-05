@@ -10,10 +10,23 @@ and open the template in the editor.
 
 html {
     background-color:  white;
+    font-family: Arial, sans-serif;
 }
 
 body {
     padding: 1%;
+}
+
+h2.menuhead {
+    margin: 0;
+    padding: 7px;
+    color: white;
+}
+
+textarea {
+   overflow: scroll;
+   resize: none;
+   word-wrap: inherit;
 }
 
 .errors {
@@ -40,13 +53,72 @@ body {
     text-align: center;
 }
 
+.title, .title:visited {
+    text-decoration: none;
+    color: navy;
+}
+
+.constColor.blue, .constColor.blue:visited {
+    color: blue;
+}
+
+.constColor.grey, .constColor.grey:visited {
+    color: silver;
+}
+
 .menucontainer {
     width: 20%;
     background-color:  lightgrey;
-    padding: 2%;
+    padding: 20px 3px 40px 10px;
     margin: 1%;
     float: left;
 }
+
+.menuheader {
+    background-color:  darkgray;
+    text-align: center;
+}
+
+.menulist {
+    background-color:  white;
+    margin: 7px 5px 0px 40px;
+    padding: 5px 15px 20px 5px;
+}
+
+.newstable {
+    width: 100%;
+    padding: 8px; 
+}
+
+.mainrow {
+    width: 60%;
+    padding: 8px; 
+}
+.mainrow.right {
+    text-align: right;
+}
+.constWid {
+    word-wrap:break-word; 
+    table-layout: fixed;
+    overflow-x: auto;
+    width: 450px;
+}
+
+.addrow {
+    width: 40%;
+    text-align: left;
+    padding: 8px; 
+    vertical-align: top;
+}
+
+.right {
+    text-align: right;
+}
+
+.butSize {
+    width: 100px;
+}
+
 
 .leftcontainer {
     width: 67%;
@@ -57,10 +129,10 @@ body {
 }
 
 .bodycontainer {
-    width: 67%;
+    width: 70%;
     border: 2px solid lightgrey;
     padding: 2%;
-    margin: 1%;
+    margin: 1% 1% 1% 0;
     float: right;
     background-color:  white;
 }
@@ -70,33 +142,4 @@ body {
     margin: 1%;
     float: right;
     text-align: left;
-}
-
-.menuheader {
-    background-color:  darkgray;
-    text-align: center;
-}
-
-.menulist {
-    background-color:  white;
-}
-
-.newstable {
-    width: 100%;
-    padding: 8px; 
-}
-
-.mainrow {
-    width: 70%;
-    padding: 8px; 
-}
-
-.addrow {
-    width: 30%;
-    text-align: right;
-    padding: 8px; 
-}
-
-.right {
-    text-align: right;
 }

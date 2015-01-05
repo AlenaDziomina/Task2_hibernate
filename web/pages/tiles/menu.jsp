@@ -9,7 +9,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
 <div class="menuheader">
-    <h2><bean:message key="menu.header"/></h2>
+    <h2 class="menuhead"><bean:message key="menu.header"/></h2>
 </div>
 <div class="menulist">
     <ul type="disc">

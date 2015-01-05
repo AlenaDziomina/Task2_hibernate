@@ -9,7 +9,9 @@
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
-<a href="index.do"><bean:message key="menu.header"/></a> >> <bean:message key="menu.label.list"/>
+<a class="constColor grey" href="index.do"><bean:message key="menu.header"/></a>
+<a class="constColor grey"> >> </a>
+<bean:message key="menu.label.list"/>
 
 <bean:define id="confirmMessage">
     <bean:message key="msg.confirmation"/>
@@ -47,7 +49,7 @@
                     </td></tr>
             </logic:iterate>
             <tr><td class="addrow" colspan="2">
-                <html:submit><bean:message key="button.delete"/></html:submit></td></tr>
+                <html:submit  styleClass="butSize"><bean:message key="button.delete"/></html:submit></td></tr>
         </table>
 
               

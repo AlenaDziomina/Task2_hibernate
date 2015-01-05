@@ -8,32 +8,38 @@
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 
-<a href="index.do"><bean:message key="menu.header"/></a> >> <bean:message key="menu.label.add"/>
-<html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
+<a class="constColor grey" href="index.do"><bean:message key="menu.header"/></a>
+<a class="constColor grey"> >> </a>
+<bean:message key="menu.label.add"/>
+
+
     <table class="newstable">
-        <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
+        <html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
+        <tr><td colspan="3"><div class="errors"><html:errors/></div></td></tr>
         <tr><td class="addrow"><bean:message key="news.title"/></td>
-            <td class="mainrow"><html:text property="newsMessage.title" 
+            <td colspan="2" class="mainrow"><html:text property="newsMessage.title" 
                        size="100"/></td></tr>   
         <tr><td class="addrow"><bean:message key="news.date"/></td>
-            <td class="mainrow"><html:text property="stringDate" size="10">
+            <td colspan="2" class="mainrow"><html:text property="stringDate" size="10">
                     <bean:write name="newsForm" property="newsMessage.date" 
                                 formatKey="format.date"/>
                 </html:text></td></tr>
         <tr><td class="addrow"><bean:message key="news.brief"/></td>
-            <td class="mainrow"><html:textarea property="newsMessage.brief" 
+            <td colspan="2" class="mainrow"><html:textarea property="newsMessage.brief" 
                            cols="75" rows="5"/></td></tr>
         <tr><td class="addrow"><bean:message key="news.content"/></td>
-            <td class="mainrow"><html:textarea property="newsMessage.content" 
+            <td colspan="2" class="mainrow"><html:textarea property="newsMessage.content" 
                            cols="75" rows="10"/></td></tr>
         <tr><td class="addrow"></td>
+            <td class="mainrow right">
+                <html:submit styleClass="butSize"><bean:message key="button.save"/></html:submit>
+                </html:form>
+            </td>
             <td class="mainrow">
-                <html:submit><bean:message key="button.save"/></html:submit>
+            <html:form action="/newsaction?action=cancel">
+                <html:cancel styleClass="butSize"><bean:message key="button.cancel"/></html:cancel>
+            </html:form>
             </td></tr>
     </table>
-</html:form>
-<html:form action="/newsaction?action=cancel">
-    <html:cancel><bean:message key="button.cancel"/></html:cancel>
-</html:form>
 
 <html:javascript formName="newsForm" staticJavascript="true"/>
