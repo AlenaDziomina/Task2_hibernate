@@ -23,36 +23,39 @@
 <html:form action="/newsaction?action=delete" 
            onsubmit="return confirmSubmit('deletedId', '${confirmMessage}', '${errMessage}')">
     <html:hidden property="forwardName" value="newslist"/>
-    
     <logic:notEmpty  name="newsForm" property="newsList">
         <table cellpadding="8" class="newstable">
-            
             <logic:iterate id="iter" name="newsForm" property="newsList" indexId="newsIndex">
                 <bean:define id="tmpMod" value="${newsIndex + 1}"/>
-                
-                <tr><td id="<bean:write name="iter" property="id"/>" class="mainrow">
-                        <bean:write name="tmpMod"/> . 
-                        <bean:write name="iter" property="title"/></td>
-                    <td class="addrow"><bean:write name="iter" property="date" 
-                                formatKey="format.date"/></td></tr>
-                <tr><td class="mainrow"><bean:write name="iter" property="brief"/></td></tr>
-                <tr><td class="addrow" colspan="2">
-                        <html:link action="/newsaction?action=edit" 
-                                   paramId="selectedId" paramName="iter" paramProperty="id">
-                            <bean:message key="label.edit"/></html:link>        
-                        <html:link action="/newsaction.do?action=view"
+                <tr><td class="mainrow bold" colspan="2"
+                        id="<bean:write name="iter" property="id"/>" >
+                        <div class="constWid add">
+                            <bean:write name="tmpMod"/>. 
+                            <bean:write name="iter" property="title"/></td>
+                        </div>
+                    <td class="addrow line center"><bean:write name="iter" property="date" 
+                                formatKey="format.date"/></td>
+                </tr>
+                <tr><td class="mainrow"><div class="constWid">
+                            <bean:write name="iter" property="brief"/></div></td>
+                    <td class="addrow line center"></td>
+                    <td class="addrow line center"></td>
+                </tr>
+                <tr><td class="mainrow" colspan="2"></td>
+                    <td class="addrow center">
+                        <html:link styleClass="constColor nodecor" action="/newsaction.do?action=view"
                                     paramId="selectedId" paramName="iter" paramProperty="id">
                             <bean:message key="label.view"/></html:link>
+                        <html:link styleClass="constColor nodecor" action="/newsaction?action=edit" 
+                                   paramId="selectedId" paramName="iter" paramProperty="id">
+                            <bean:message key="label.edit"/></html:link>
                         <html:multibox property="deletedId">
                             <bean:write name="iter" property="id"/></html:multibox>
-                                <bean:write name="iter" property="id"/>
                     </td></tr>
             </logic:iterate>
             <tr><td class="addrow" colspan="2">
                 <html:submit  styleClass="butSize"><bean:message key="button.delete"/></html:submit></td></tr>
-        </table>
-
-              
+        </table>       
     </logic:notEmpty>
     
     <logic:empty name="newsForm" property="newsList">

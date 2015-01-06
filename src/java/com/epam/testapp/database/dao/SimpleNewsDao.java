@@ -25,12 +25,13 @@ public class SimpleNewsDao implements INewsDao {
     }
 
     @Override
-    public void save(News news) {
-        if (news == null) return;
+    public Integer save(News news) {
+        if (news == null) return null;
         if (news.getId() == null) {
             news.setId(++index);
         }
         newsList.add(news);
+        return index;
     }
 
     @Override

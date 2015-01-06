@@ -15,13 +15,13 @@ import java.util.List;
  * @author Alena_Grouk
  */
 public interface IGenericQuery {
-    <T> List<Integer> deleteQuery(String query, Object[] params,
+    void deleteQuery(String query, Object[] params,
             Connection conn) throws DaoSqlException;
     <T> List<T> loadQuery(String query, Object[] params, Connection conn,
             RowMapper<T> mapper) throws DaoSqlException;
-    <T> List<Integer> saveQuery(String query, String generatedName, 
-            Object[][] params, Connection conn) throws DaoSqlException;
-    <T> List<Integer> updateQuery(String query, Object[] params, Connection conn)
-            throws DaoSqlException;
+    Integer saveQuery(String query, String generatedName, 
+            Object[] params, Connection conn) throws DaoSqlException;
+    void updateQuery(String query, Object[] params, 
+            Connection conn) throws DaoSqlException;
 
 }

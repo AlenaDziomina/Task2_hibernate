@@ -12,7 +12,6 @@
 
 <h1 class="titletext"><a class="title" href="index.do"><bean:message key="welcome.title"/></a></h1>
 <div class="right">
-    
     <html:link styleClass="constColor blue" action="/newsaction.do?action=locale&locale=EN">
         <bean:message key="label.en"/></html:link> 
     <html:link styleClass="constColor blue" action="/newsaction.do?action=locale&locale=RU">

@@ -10,7 +10,6 @@ import com.epam.testapp.database.dao.INewsDao;
 import com.epam.testapp.model.News;
 import com.epam.testapp.presentation.form.NewsForm;
 import com.epam.testapp.util.converter.DataConverter;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,7 +56,6 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         List list = getNewsDao().getList();
         newsForm.setNewsList(list);
-        LOGGER.debug("LOGGER DEBUGGER!!!!!!!");
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
@@ -112,8 +110,7 @@ public class NewsAction extends DispatchAction {
             return mapping.findForward(FORWARD_NEWSEDIT);
         }
         newsForm.getNewsMessage().setDate(DataConverter.toSqlDate(newsForm.getStringDate()));
-        
-        getNewsDao().save(newsForm.getNewsMessage());
+        newsForm.getNewsMessage().setId(getNewsDao().save(newsForm.getNewsMessage()));
         return mapping.findForward(FORWARD_NEWSVIEW);
     }
     
