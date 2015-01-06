@@ -6,22 +6,22 @@
 
 package com.epam.testapp.presentation.action;
 
-import com.epam.testapp.dao.INewsDao;
-import com.epam.testapp.manager.DataManager;
-import com.epam.testapp.presentation.form.News;
+import com.epam.testapp.database.dao.INewsDao;
+import com.epam.testapp.model.News;
 import com.epam.testapp.presentation.form.NewsForm;
+import com.epam.testapp.util.converter.DataConverter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 import org.apache.struts.Globals;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.DispatchAction;
 
 /**
@@ -29,7 +29,7 @@ import org.apache.struts.actions.DispatchAction;
  * @author Alena_Grouk
  */
 public class NewsAction extends DispatchAction {
-    
+    private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
     private static final String FORWARD_INDEX = "index";
     private static final String FORWARD_NEWSLIST = "newslist";
     private static final String FORWARD_NEWSEDIT = "newsedit";
@@ -57,6 +57,7 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         List list = getNewsDao().getList();
         newsForm.setNewsList(list);
+        LOGGER.debug("LOGGER DEBUGGER!!!!!!!");
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
@@ -75,7 +76,7 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
         newsForm.setNewsMessage(getNewsDao().fetchById(id));
-        newsForm.setStringDate(DataManager.toFormatString(newsForm.getNewsMessage().getDate()));
+        newsForm.setStringDate(DataConverter.toFormatString(newsForm.getNewsMessage().getDate()));
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
     
@@ -84,7 +85,6 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         String[] deletedId = newsForm.getDeletedId();
-        //validation!!!!
         List idList = new ArrayList();
         for(String strId : deletedId) {
             idList.add(Integer.decode(strId));
@@ -111,9 +111,7 @@ public class NewsAction extends DispatchAction {
             saveErrors(request, errors);
             return mapping.findForward(FORWARD_NEWSEDIT);
         }
-        try {
-            newsForm.getNewsMessage().setDate(DataManager.toSqlDate(newsForm.getStringDate()));
-        } catch (ParseException ex) {}
+        newsForm.getNewsMessage().setDate(DataConverter.toSqlDate(newsForm.getStringDate()));
         
         getNewsDao().save(newsForm.getNewsMessage());
         return mapping.findForward(FORWARD_NEWSVIEW);
@@ -124,8 +122,8 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         newsForm.setNewsMessage(new News());
-        newsForm.getNewsMessage().setDate(DataManager.toSqlDate());
-        newsForm.setStringDate(DataManager.toFormatString(null));
+        newsForm.getNewsMessage().setDate(DataConverter.toSqlDate());
+        newsForm.setStringDate(DataConverter.toFormatString(null));
         newsForm.setForwardName(FORWARD_INDEX);
         return mapping.findForward(FORWARD_NEWSEDIT);
     }

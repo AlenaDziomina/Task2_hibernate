@@ -7,15 +7,15 @@
         singleton="true">
         <property name="newsDao" ref="jdbcNewsDao"></property>
     </bean>
-    <bean id="simpleNewsDao" class="com.epam.testapp.dao.SimpleNewsDao"
+    <bean id="simpleNewsDao" class="com.epam.testapp.database.dao.SimpleNewsDao"
         singleton="true">
     </bean>
-    <bean id="jdbcNewsDao" class="com.epam.testapp.dao.JdbcNewsDao"
+    <bean id="jdbcNewsDao" class="com.epam.testapp.database.dao.JdbcNewsDao"
         singleton="true">
         <property name="connectionPool" ref="jdbcConnectionPool"></property>
         <property name="genericQuery" ref="jdbcGenericQuery"></property>
     </bean>
-    <bean id="jdbcConnectionPool" class="com.epam.testapp.connection.JdbcConnectionPool"
+    <bean id="jdbcConnectionPool" class="com.epam.testapp.database.connection.JdbcConnectionPool"
         singleton="true" init-method="init" destroy-method="destroy">
         <property name="dbMaxConnections">
             <value>1</value>
@@ -36,7 +36,7 @@
                 <value>alena</value>
         </property>
     </bean>
-    <bean id="jdbcGenericQuery" class="com.epam.testapp.dao.jdbc.GenericQuery"
+    <bean id="jdbcGenericQuery" class="com.epam.testapp.database.dao.jdbc.GenericQuery"
           singleton="true">
     </bean>
 </beans>

@@ -6,15 +6,12 @@
 
 package com.epam.testapp.presentation.form;
 
-import com.epam.testapp.manager.DataManager;
-import java.text.ParseException;
+import com.epam.testapp.model.News;
+import static com.epam.testapp.util.validator.NewsValidator.*;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.validator.ValidatorForm;
 
 /**
@@ -30,31 +27,11 @@ public class NewsForm extends ValidatorForm {
     private String selectedId;
     private String[] deletedId;
     
-    private static final int TITLE_MAXLENGTH = 100;
-    private static final int STRDATE_MAXLENGTH = 10;
-    private static final int BRIEF_MAXLENGTH = 500;
-    private static final int CONTENT_MAXLENGTH = 2048;
     
 
     @Override
     @SuppressWarnings("empty-statement")
-    public void reset(ActionMapping mapping, HttpServletRequest request) {
-//        newsMessage = new News();
-//        newsList = new ArrayList();
-//        stringDate = "";
-//        selectedId = "";
-//        deletedId = new String[0];
-//        forwardName = "";
-//        newsMessage.setId(0);
-//        newsMessage.setTitle("unnTitle");
-//        newsMessage.setBrief("unnBrief");
-//        newsMessage.setContent("unnContent");
-//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-//        stringDate = formatter.format(new Date());
-        //newsMessage.setDate();
-//        newsList.add(newsMessage);
-        //locale = new Locale("RU");
-    }
+    public void reset(ActionMapping mapping, HttpServletRequest request) {}
     
     @Override
     public ActionErrors validate(ActionMapping mapping,
@@ -167,46 +144,6 @@ public class NewsForm extends ValidatorForm {
         
     }
     
-    private void validateTitle(ActionErrors errors, News newsMessage) {
-        if ("".equals(newsMessage.getTitle())) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.title"));
-        } else if (newsMessage.getTitle().length() > TITLE_MAXLENGTH) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, 
-                    new ActionMessage("errors.maxLength.title", TITLE_MAXLENGTH));
-        }
-    }
     
-    private void validateBrief(ActionErrors errors, News newsMessage) {
-        if ("".equals(newsMessage.getBrief())) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.brief"));
-        } else if (newsMessage.getBrief().length() > BRIEF_MAXLENGTH) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, 
-                    new ActionMessage("errors.maxLength.brief", BRIEF_MAXLENGTH));
-        }
-    }
-    
-    private void validateContent(ActionErrors errors, News newsMessage) {
-        if ("".equals(newsMessage.getContent())) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.content"));
-        } else if (newsMessage.getContent().length() > CONTENT_MAXLENGTH) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, 
-                    new ActionMessage("errors.maxLength.content", CONTENT_MAXLENGTH));
-        }
-    }
-
-    private void validateStringDate(ActionErrors errors, String stringDate) {
-        if ("".equals(stringDate)) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.required.strdate"));
-        } else if (stringDate.length() > STRDATE_MAXLENGTH) {
-            errors.add(ActionErrors.GLOBAL_MESSAGE, 
-                    new ActionMessage("errors.maxLength.strdate", STRDATE_MAXLENGTH));
-        } else {
-            try {
-                DataManager.toSqlDate(stringDate);
-            } catch (ParseException ex) {
-                errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("errors.strdate.parse"));
-            }
-        }
-    }
 }
 

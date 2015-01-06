@@ -34,7 +34,7 @@
     
     <controller processorClass="org.springframework.web.struts.DelegatingTilesRequestProcessor"/>
 
-    <message-resources parameter="com/myapp/struts/ApplicationResource" null="false"/>    
+    <message-resources parameter="resource/ApplicationResource" null="false"/>    
     
     
     <!-- ========================= Tiles plugin ===============================-->
