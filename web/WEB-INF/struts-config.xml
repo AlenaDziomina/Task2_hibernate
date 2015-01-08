@@ -15,12 +15,15 @@
     </global-exceptions>
 
     <global-forwards>
-        <forward name="index" path="index.page"/>
+        <forward name="index1" path="index.page"/>
+        <forward name="index" path="newslist.page"/>
         <forward name="newsview" path="/newsview.do"/>
     </global-forwards>
 
     <action-mappings>
-        <action path="/index" forward="index.page"/>
+        <action path="/index" forward="/newsaction.do?action=list"/>
+            
+        <action path="/index1" forward="index.page"/>
         
         <action path="/newsaction" name="newsForm" scope="session" 
                 type="org.springframework.web.struts.DelegatingActionProxy" 

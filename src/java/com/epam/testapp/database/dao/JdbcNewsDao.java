@@ -72,12 +72,15 @@ public class JdbcNewsDao implements INewsDao{
     @Override
     public News fetchById(Integer id) throws DaoException {
         Connection connection = null;
-        List<News> newsList = null;
+        News news = null;
         try {
             connection = getConnectionPool().getConnection();
             Object[] params = new Object[]{id};
-            newsList = getGenericQuery().loadQuery(SELECT_BY_ID_QUERY, params, 
+            List<News> newsList = getGenericQuery().loadQuery(SELECT_BY_ID_QUERY, params, 
                     connection, rowMapper);
+            if (newsList != null && !newsList.isEmpty()) {
+                news = newsList.get(0);
+            }
         } catch (DaoSqlException | DaoConnectException ex) {
             throw new DaoException(ex);
         } finally {
@@ -89,7 +92,7 @@ public class JdbcNewsDao implements INewsDao{
                 }
             }
         }
-        return newsList.get(0);
+        return news;
     }
 
     @Override

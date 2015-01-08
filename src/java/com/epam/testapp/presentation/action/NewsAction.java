@@ -21,6 +21,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.DispatchAction;
 
 /**
@@ -30,6 +31,7 @@ import org.apache.struts.actions.DispatchAction;
 public class NewsAction extends DispatchAction {
     private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
     private static final String FORWARD_INDEX = "index";
+    private static final String HEADER_REFERER = "Referer";
     private static final String FORWARD_NEWSLIST = "newslist";
     private static final String FORWARD_NEWSEDIT = "newsedit";
     private static final String FORWARD_NEWSVIEW = "newsview";
@@ -56,6 +58,7 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         List list = getNewsDao().getList();
         newsForm.setNewsList(list);
+        newsForm.setForwardName(FORWARD_NEWSLIST);
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
@@ -64,7 +67,17 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
-        newsForm.setNewsMessage(getNewsDao().fetchById(id));
+        News news = getNewsDao().fetchById(id);
+        newsForm.setNewsMessage(news);
+        if (news != null) {
+            newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
+        } else {
+            ActionErrors errors = new ActionErrors();
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.news.deleted"));
+            saveErrors(request, errors);
+        }
+        newsForm.setForwardName(FORWARD_NEWSVIEW);
         return mapping.findForward(FORWARD_NEWSVIEW);
     }
     
@@ -73,8 +86,16 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
-        newsForm.setNewsMessage(getNewsDao().fetchById(id));
-        newsForm.setStringDate(DataConverter.toFormatString(newsForm.getNewsMessage().getDate()));
+        News news = getNewsDao().fetchById(id);
+        newsForm.setNewsMessage(news);
+        if (news != null) {
+            newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
+        } else {
+            ActionErrors errors = new ActionErrors();
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.news.deleted"));
+            saveErrors(request, errors);
+        }
         return mapping.findForward(FORWARD_NEWSEDIT);
     }
     
@@ -88,7 +109,6 @@ public class NewsAction extends DispatchAction {
             idList.add(Integer.decode(strId));
         }
         getNewsDao().remove(idList);
-        getNewsDao().getList();
         newsForm.setNewsList(getNewsDao().getList());
         return mapping.findForward(FORWARD_NEWSLIST);
     }
@@ -111,6 +131,7 @@ public class NewsAction extends DispatchAction {
         }
         newsForm.getNewsMessage().setDate(DataConverter.toSqlDate(newsForm.getStringDate()));
         newsForm.getNewsMessage().setId(getNewsDao().save(newsForm.getNewsMessage()));
+        newsForm.setForwardName(FORWARD_NEWSVIEW);
         return mapping.findForward(FORWARD_NEWSVIEW);
     }
     
@@ -131,8 +152,7 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         Locale locale = new Locale(newsForm.getLocale(), newsForm.getLocale());
         request.getSession().setAttribute(Globals.LOCALE_KEY, locale);
-        return mapping.findForward(FORWARD_INDEX);
+        String path = request.getHeader(HEADER_REFERER);
+        return new ActionForward(path, true);
     }
-    
-
 }
