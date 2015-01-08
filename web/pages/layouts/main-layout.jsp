@@ -16,19 +16,21 @@
     </head>
     
     <body>
-        <div id="header">
-            <tiles:insert attribute="header"/>
-        </div>
-        <div id="main">
-            <div class="menucontainer">
-                <tiles:insert attribute="menu"/>
-            </div>
-            <div class="bodycontainer">
-                <tiles:insert attribute="body"/>
-            </div>
-        </div>
-        <div id="footer">
-            <tiles:insert attribute="footer"/>
+        <div id="wrapper">
+                <div id="header">
+                    <tiles:insert attribute="header"/>
+                </div>
+                <div id="main">
+                    <div class="menucontainer">
+                        <tiles:insert attribute="menu"/>
+                    </div>
+                    <div class="bodycontainer">
+                        <tiles:insert attribute="body"/>
+                    </div>
+                </div>
+                <div id="footer">
+                    <tiles:insert attribute="footer"/>
+                </div>
         </div>
     </body>
     
