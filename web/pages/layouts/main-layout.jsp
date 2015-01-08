@@ -17,6 +17,7 @@
     
     <body>
         <div id="wrapper">
+            <div id="content">
                 <div id="header">
                     <tiles:insert attribute="header"/>
                 </div>
@@ -28,9 +29,10 @@
                         <tiles:insert attribute="body"/>
                     </div>
                 </div>
-                <div id="footer">
-                    <tiles:insert attribute="footer"/>
-                </div>
+            </div>
+            <div id="footer">
+                <tiles:insert attribute="footer"/>
+            </div>
         </div>
     </body>
     
