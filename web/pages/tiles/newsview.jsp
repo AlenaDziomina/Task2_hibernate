@@ -65,23 +65,4 @@
         </td>
     </tr>
 </table>
-
-    
-<div class="leftcontainer">
-    <html:form action="/newsaction?action=edit">
-        <html:hidden property="forwardName" value="newsview"/>
-        <input type="hidden" name="selectedId" 
-           value="<bean:write name="newsForm" property="newsMessage.id"/>"/>
-    
-        <html:submit  styleClass="butSize" property="action">
-            <bean:message key="button.edit"/></html:submit>
-    </html:form>
-</div>
-<div class="rigthcontainer">  
-    <html:form action="/newsaction?action=delete" onsubmit="return confirmation('${confirmMessage}')">
-        <input type="hidden" name="deletedId" 
-           value="<bean:write name="newsForm" property="newsMessage.id"/>"/>
-        <html:submit  styleClass="butSize" property="action">
-            <bean:message key="button.delete"/></html:submit>
-    </html:form>
-</div>      
+  

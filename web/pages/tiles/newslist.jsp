@@ -53,8 +53,11 @@
                             <bean:write name="iter" property="id"/></html:multibox>
                     </td></tr>
             </logic:iterate>
-            <tr><td class="addrow" colspan="2">
-                <html:submit  styleClass="butSize"><bean:message key="button.delete"/></html:submit></td></tr>
+            <tr><td class="mainrow" colspan="2"></td>
+                <td class="addrow center"><html:submit  styleClass="butSize">
+                        <bean:message key="button.delete"/></html:submit>
+                </td>
+            </tr>
         </table>       
     </logic:notEmpty>
     
