@@ -5,13 +5,15 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 
 <a class="constColor grey" href="index.do"><bean:message key="menu.header"/></a>
 <a class="constColor grey"> >> </a>
 <bean:message key="menu.label.add"/>
+
+
 
 <logic:notPresent  name="newsForm" property="newsMessage">
     <div class="errors"><html:errors/></div>
@@ -19,6 +21,7 @@
 <logic:present  name="newsForm" property="newsMessage">
     <table class="newstable">
         <html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
+            <jsp:include page="/WEB-INF/jsp/validationMsg.jsp" />           
         <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
         <tr><td class="addrow"><bean:message key="news.title"/></td>
             <td colspan="2" class="mainrow"><html:text property="newsMessage.title" 
@@ -46,4 +49,3 @@
             </td></tr>
     </table>
 </logic:present>
-<html:javascript formName="newsForm" staticJavascript="true"/>

@@ -13,6 +13,7 @@
         <title><bean:message key="welcome.title"/></title>
         <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css"/>
         <script src="<%=request.getContextPath()%>/js/main.js"></script>
+        <script src="<%=request.getContextPath()%>/js/validation.js"></script>
     </head>
     
     <body>
