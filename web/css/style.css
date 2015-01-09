@@ -84,12 +84,6 @@ html, body {
     position: relative;
     overflow: auto;
 }
-/*
-.clear {
-    clear: both;
-    content: "";
-    display: table;
-}*/
 
 .titlecontainer {
     width: 60%;
@@ -166,6 +160,26 @@ textarea {
     margin: 4% 3% 0 15%;
     padding: 2% 4% 8% 2%;
 }
+
+.menulinks {
+    list-style-image: url("../images/point.jpg");
+}
+
+
+.menuitem {
+    margin: 5% 0;
+}
+
+.disactive, .disactive:visited {
+    margin-left: 15%;
+    color: blue;
+}
+
+.active, .active:visited {
+    margin-left: 15%;
+    color: orange;
+}
+
 
 
 .newstable {

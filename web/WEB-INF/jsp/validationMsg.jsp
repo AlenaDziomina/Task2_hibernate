@@ -10,6 +10,8 @@
 
 
 <script>
+    var errMessage = '<bean:message key='errors.confirmation'/>';
+    var confirmMessage = '<bean:message key='msg.confirmation'/>';
     var titleRequired = '<bean:message key='errors.required.title'/>';
     var dateRequired = '<bean:message key='errors.required.strdate'/>';
     var briefRequired = '<bean:message key='errors.required.brief'/>';

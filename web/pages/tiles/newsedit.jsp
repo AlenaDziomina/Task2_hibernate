@@ -13,8 +13,6 @@
 <a class="constColor grey"> >> </a>
 <bean:message key="menu.label.add"/>
 
-
-
 <logic:notPresent  name="newsForm" property="newsMessage">
     <div class="errors"><html:errors/></div>
 </logic:notPresent>
@@ -48,4 +46,9 @@
             </html:form>
             </td></tr>
     </table>
+    <logic:notPresent  name="newsForm" property="newsMessage.id">
+        <script>
+            setAddingVisited();
+        </script>
+    </logic:notPresent>
 </logic:present>

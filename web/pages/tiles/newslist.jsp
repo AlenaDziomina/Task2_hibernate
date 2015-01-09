@@ -12,16 +12,11 @@
 <a class="constColor grey" href="index.do"><bean:message key="menu.header"/></a>
 <a class="constColor grey"> >> </a>
 <bean:message key="menu.label.list"/>
-
-<bean:define id="confirmMessage">
-    <bean:message key="msg.confirmation"/>
-</bean:define>
-<bean:define id="errMessage">
-    <bean:message key="errors.confirmation"/>
-</bean:define>
-
+<script>
+    setListVisited();
+</script> 
 <html:form action="/newsaction?action=delete" 
-           onsubmit="return confirmSubmit('deletedId', '${confirmMessage}', '${errMessage}')">
+           onsubmit="return confirmSubmit('deletedId')">
     <logic:notEmpty  name="newsForm" property="newsList">
         <table cellpadding="8" class="newstable">
             <logic:iterate id="iter" name="newsForm" property="newsList" indexId="newsIndex">
@@ -57,11 +52,12 @@
                         <bean:message key="button.delete"/></html:submit>
                 </td>
             </tr>
+            <tr><td colspan="2"><div class="errors"><html:errors/></div></td></tr>
         </table>       
     </logic:notEmpty>
     
     <logic:empty name="newsForm" property="newsList">
-        <h5>News list is empty.</h5>
+        <h5><bean:message key="newslist.empty"/></h5>
     </logic:empty>
         
 </html:form>

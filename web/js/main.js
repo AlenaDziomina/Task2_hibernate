@@ -4,21 +4,21 @@
  * and open the template in the editor.
  */
 
-function confirmSubmit(boxName, confirmMsg, errorMsg){
+function confirmSubmit(boxName){
     var flag = checkIsSelected(boxName);
     if (flag) {
-        return confirmation(confirmMsg);
+        return confirmation();
     } else {
-        return errorMessage(errorMsg);
+        return errorMessage();
     }
 }
 
-function errorMessage(errorMsg){
+function errorMessage(){
     alert(errorMsg);
     return false;
 }
 
-function confirmation(confirmMsg){
+function confirmation(){
     var agree=confirm(confirmMsg);
     if(agree) {
         return true;
@@ -39,4 +39,18 @@ function checkIsSelected(boxName){
         i++;
     }
     return flag;
+}
+
+function setListVisited(){
+    var elem = document.getElementById("menuLinkList");
+    if (elem !== null) {
+        elem.className = "active";
+    }
+}
+
+function setAddingVisited(){
+    var elem = document.getElementById("menuLinkAdd");
+    if (elem !== null) {
+        elem.className = "active";
+    }
 }

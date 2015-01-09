@@ -104,12 +104,19 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         String[] deletedId = newsForm.getDeletedId();
-        List idList = new ArrayList();
-        for(String strId : deletedId) {
-            idList.add(Integer.decode(strId));
+        if (deletedId != null) {
+            List idList = new ArrayList();
+            for(String strId : deletedId) {
+                idList.add(Integer.decode(strId));
+            }
+            getNewsDao().remove(idList);
+            newsForm.setNewsList(getNewsDao().getList());
+        } else {
+            ActionErrors errors = new ActionErrors();
+            errors.add(ActionErrors.GLOBAL_MESSAGE, 
+                    new ActionMessage("errors.confirmation"));
+            saveErrors(request, errors);
         }
-        getNewsDao().remove(idList);
-        newsForm.setNewsList(getNewsDao().getList());
         return mapping.findForward(FORWARD_NEWSLIST);
     }
     
