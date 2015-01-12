@@ -21,6 +21,9 @@
     var briefMaxLength = '<bean:message key='errors.maxLength.brief.full'/>';
     var contentMaxLength = '<bean:message key='errors.maxLength.content.full'/>';
     var dateFormat = '<bean:message key='errors.strdate.parse'/>';
+    var invalidDay = '<bean:message key='errors.invalid.day'/>';
+    var invalidMonth = '<bean:message key='errors.invalid.month'/>';
+    var invalidYear = '<bean:message key='errors.invalid.year'/>';
     var titleMaxLeng = 100;
     var dateMaxLeng = 10;
     var briefMaxLeng = 500;

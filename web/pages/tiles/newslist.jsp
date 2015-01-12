@@ -35,8 +35,7 @@
                     <td class="addrow line center"></td>
                     <td class="addrow line center"></td>
                 </tr>
-                <tr><td class="mainrow" colspan="2"></td>
-                    <td class="addrow center">
+                <tr><td class="addrow right" colspan="3">
                         <html:link styleClass="constColor nodecor" action="/newsaction.do?action=view"
                                     paramId="selectedId" paramName="iter" paramProperty="id">
                             <bean:message key="label.view"/></html:link>

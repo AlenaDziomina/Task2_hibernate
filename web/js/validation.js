@@ -159,16 +159,20 @@ function jcv_isValidDate(day, month, year) {
     var y = parseInt(year);
     
     if (m < 1 || m > 12) {
+        jcv_handleErrors(invalidMonth);
         return false;
     }
     if (d < 1 || d > 31) {
+        jcv_handleErrors(invalidDay);
         return false;
     }
     if ((m === 4 || m === 6 || m === 9 || m === 11) &&
         (d === 31)) {
+        jcv_handleErrors(invalidDay);
         return false;
     }
     if (m === 2) {
+        jcv_handleErrors(invalidYear);
         var leap = (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0));
         if (d>29 || (d === 29 && !leap)) {
             return false;
