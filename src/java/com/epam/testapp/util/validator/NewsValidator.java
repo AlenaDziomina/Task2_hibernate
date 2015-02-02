@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.util.validator;
 
 import com.epam.testapp.model.News;
 import com.epam.testapp.util.converter.DataConverter;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class NewsValidator {
     private static final int TITLE_MAXLENGTH = 100;
     private static final int STRDATE_MAXLENGTH = 10;

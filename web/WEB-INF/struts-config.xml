@@ -46,7 +46,7 @@
         <set-property property="moduleaware" value="true"/>
     </plug-in>
     <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
-        <set-property property="contextConfigLocation" value="/WEB-INF/action-servlet.xml"/>
+        <set-property property="contextConfigLocation" value="/WEB-INF/spring-bean.xml"/>
     </plug-in>
     <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
         <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>

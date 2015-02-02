@@ -1,21 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.util.converter;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class DataConverter {
     
     private static final String DATE_FORMAT = "MM/dd/yyyy";

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.presentation.form;
 
 import com.epam.testapp.model.News;
@@ -14,10 +8,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm;
 
-/**
- *
- * @author Alena.Grouk
- */
 public class NewsForm extends ValidatorForm {
     private News newsMessage;
     private List newsList;

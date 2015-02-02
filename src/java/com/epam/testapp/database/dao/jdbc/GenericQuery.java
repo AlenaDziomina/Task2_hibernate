@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.database.dao.jdbc;
 
 import com.epam.testapp.database.exception.DaoSqlException;
@@ -15,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class GenericQuery implements IGenericQuery {
     private static final Logger LOGGER = Logger.getLogger(GenericQuery.class);
     private static final String CLOSE_ERROR = "Error in close ResultSet or PreparedStatement.";

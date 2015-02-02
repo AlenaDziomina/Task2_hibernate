@@ -1,9 +1,5 @@
 package com.epam.testapp.database.exception;
 
-/**
- *
- * @author Helena.Grouk
- */
 public class DaoException extends Exception {
 
     public DaoException(){

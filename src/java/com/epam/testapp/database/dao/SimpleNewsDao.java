@@ -1,19 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.database.dao;
 
 import com.epam.testapp.model.News;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class SimpleNewsDao implements INewsDao {
 
     private final List<News> newsList = new ArrayList();

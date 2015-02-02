@@ -1,9 +1,3 @@
-<%-- 
-    Document   : errorpage
-    Created on : Jan 6, 2015, 8:25:08 AM
-    Author     : Alena_Grouk
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

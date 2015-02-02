@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.presentation.action;
 
 import com.epam.testapp.database.dao.INewsDao;
@@ -24,10 +18,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.actions.DispatchAction;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class NewsAction extends DispatchAction {
     private static final Logger LOGGER = Logger.getLogger(NewsAction.class);
     private static final String FORWARD_INDEX = "index";

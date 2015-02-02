@@ -1,9 +1,3 @@
-<%-- 
-    Document   : errordao1
-    Created on : Jan 6, 2015, 8:28:33 AM
-    Author     : Alena_Grouk
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.epam.testapp.database.connection;
 
 import com.epam.testapp.database.exception.DaoConnectException;
@@ -30,10 +24,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 import org.apache.log4j.Logger;
 
-/**
- *
- * @author Alena_Grouk
- */
 public class JdbcConnectionPool implements IConnectionPool {
     private static final Logger LOGGER = Logger.getLogger(JdbcConnectionPool.class);
     private static final String DRIVER_ERROR = "Driver is not found.";
