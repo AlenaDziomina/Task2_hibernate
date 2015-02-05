@@ -8,7 +8,7 @@ import com.epam.testapp.database.exception.DaoConnectException;
 import com.epam.testapp.database.exception.DaoException;
 import com.epam.testapp.database.exception.DaoSqlException;
 import com.epam.testapp.model.News;
-import com.epam.testapp.util.querybuilder.QueryAppend;
+import com.epam.testapp.util.query.QueryAppend;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
