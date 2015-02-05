@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="jdbcNewsDao" class="com.epam.testapp.database.dao.JdbcNewsDao"
+          singleton="true">
+        <property name="connectionPool" ref="jdbcConnectionPool"></property>
+        <property name="genericQuery" ref="jdbcGenericQuery"></property>
+    </bean>
+    <bean id="jdbcConnectionPool" class="com.epam.testapp.database.connection.JdbcConnectionPool"
+          singleton="true" init-method="init" destroy-method="destroy">
+        <property name="dbMaxConnections">
+            <value>1</value>
+        </property>
+        <property name="dbMaxIdleConnections">
+            <value>1</value>
+        </property>
+        <property name="dbUrl">
+            <value>jdbc:oracle:thin:@localhost:1521:XE</value>
+        </property>
+        <property name="dbDriverName">
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="dbUserName">
+            <value>alena</value>
+        </property>
+        <property name="dbPassword">
+            <value>alena</value>
+        </property>
+    </bean>
+    <bean id="jdbcGenericQuery" class="com.epam.testapp.database.dao.jdbc.GenericQuery"
+          singleton="true">
+    </bean>
+
+</beans>

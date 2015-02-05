@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="jpaNewsDao" class="com.epam.testapp.database.dao.JpaNewsDao"
+        singleton="true">
+        <property name="managerEntity" ref="entityManagerFactory"></property>
+    </bean>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"
+        singleton="true">
+        <property name="persistenceUnitName">
+            <value>newsJpaUnit</value>
+        </property>
+    </bean>
+
+</beans>

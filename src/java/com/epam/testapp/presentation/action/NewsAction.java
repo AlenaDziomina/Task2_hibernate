@@ -1,8 +1,8 @@
 package com.epam.testapp.presentation.action;
 
-import com.epam.testapp.database.dao.INewsDao;
 import com.epam.testapp.model.News;
 import com.epam.testapp.presentation.form.NewsForm;
+import com.epam.testapp.service.INewsService;
 import com.epam.testapp.util.converter.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +26,27 @@ public class NewsAction extends DispatchAction {
     private static final String FORWARD_NEWSEDIT = "newsedit";
     private static final String FORWARD_NEWSVIEW = "newsview";
     
-    private INewsDao newsDao;
+    private INewsService newsService;
     
     /**
-     * @return the newsDao
+     * @return the newsService
      */
-    public INewsDao getNewsDao() {
-        return newsDao;
+    public INewsService getNewsService() {
+        return newsService;
     }
 
     /**
-     * @param newsDao the newsDao to set
+     * @param newsService the newsService to set
      */
-    public void setNewsDao(INewsDao newsDao) {
-        this.newsDao = newsDao;
+    public void setNewsService(INewsService newsService) {
+        this.newsService = newsService;
     }
 
     public ActionForward list(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
-        List list = getNewsDao().getList();
+        List list = getNewsService().getList();
         newsForm.setNewsList(list);
         newsForm.setForwardName(FORWARD_NEWSLIST);
         return mapping.findForward(FORWARD_NEWSLIST);
@@ -57,7 +57,7 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
-        News news = getNewsDao().fetchById(id);
+        News news = getNewsService().fetchById(id);
         newsForm.setNewsMessage(news);
         if (news != null) {
             newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
@@ -76,7 +76,7 @@ public class NewsAction extends DispatchAction {
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
         Integer id = Integer.decode(newsForm.getSelectedId());
-        News news = getNewsDao().fetchById(id);
+        News news = getNewsService().fetchById(id);
         newsForm.setNewsMessage(news);
         if (news != null) {
             newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
@@ -99,8 +99,8 @@ public class NewsAction extends DispatchAction {
             for(String strId : deletedId) {
                 idList.add(Integer.decode(strId));
             }
-            getNewsDao().remove(idList);
-            newsForm.setNewsList(getNewsDao().getList());
+            getNewsService().remove(idList);
+            newsForm.setNewsList(getNewsService().getList());
         } else {
             ActionErrors errors = new ActionErrors();
             errors.add(ActionErrors.GLOBAL_MESSAGE, 
@@ -127,7 +127,7 @@ public class NewsAction extends DispatchAction {
             return mapping.findForward(FORWARD_NEWSEDIT);
         }
         newsForm.getNewsMessage().setDate(DataConverter.toSqlDate(newsForm.getStringDate()));
-        newsForm.getNewsMessage().setId(getNewsDao().save(newsForm.getNewsMessage()));
+        newsForm.getNewsMessage().setId(getNewsService().save(newsForm.getNewsMessage()));
         newsForm.setForwardName(FORWARD_NEWSVIEW);
         return mapping.findForward(FORWARD_NEWSVIEW);
     }

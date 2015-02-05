@@ -2,13 +2,16 @@ package com.epam.testapp.database.dao;
 
 import com.epam.testapp.database.connection.IConnectionPool;
 import com.epam.testapp.database.dao.jdbc.IGenericQuery;
+import com.epam.testapp.database.dao.jdbc.QueryMapper;
 import com.epam.testapp.database.dao.jdbc.RowMapper;
 import com.epam.testapp.database.exception.DaoConnectException;
 import com.epam.testapp.database.exception.DaoException;
 import com.epam.testapp.database.exception.DaoSqlException;
 import com.epam.testapp.model.News;
+import com.epam.testapp.util.querybuilder.QueryAppend;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -18,8 +21,9 @@ public class JdbcNewsDao implements INewsDao{
     private static final String DB_NEWS_DATE = "NEWS_DATE";
     private static final String DB_NEWS_BRIEF = "BRIEF";
     private static final String DB_NEWS_CONTENT = "CONTENT";
-    private static final String SELECT_QUERY = "SELECT* from NEWS ORDER BY NEWS_DATE DESC";
-    private static final String SELECT_BY_ID_QUERY = "SELECT* from NEWS where NEWS_ID = ?";
+    private static final String SELECT_QUERY = "SELECT * FROM NEWS ";
+    private static final String QUERY_DELIM = " OR ";
+    private static final String QUERY_ORDER_DATE = " ORDER BY NEWS_DATE DESC ";
     private static final String UPDATE_QUERY = "UPDATE NEWS set TITLE= ?, NEWS_DATE = ?, BRIEF = ?, CONTENT = ? where NEWS_ID = ?";
     private static final String INSERT_QUERY = "INSERT INTO NEWS (TITLE, NEWS_DATE, BRIEF, CONTENT) VALUES (?, ?, ?, ?)";
     private static final String DELETE_QUERY = "Delete from NEWS where NEWS_ID = ?";
@@ -36,14 +40,32 @@ public class JdbcNewsDao implements INewsDao{
         bean.setContent(rs.getString(DB_NEWS_CONTENT));
         return bean;
     };
+    private final QueryMapper queryMapper = (QueryMapper) (List newsList, List params) -> {
+        StringBuilder sb = new StringBuilder();
+        if (newsList == null) {
+            return sb;
+        }
+        
+        for (News news : (List<News>)newsList){
+            if (news.getId() != null) {
+                QueryAppend.append(sb, DB_NEWS_ID, QUERY_DELIM);
+                params.add(news.getId());
+            }
+        }
+        return sb;
+    };
+    
 
     @Override
-    public List getList() throws DaoException {
-        List<News> newsList = null;
+    public List select(List<News> list) throws DaoException {
+        List<News> newsList;
         Connection connection = null;
         try {
             connection = getConnectionPool().getConnection();
-            newsList = getGenericQuery().loadQuery(SELECT_QUERY, new Object[0], 
+            List params = new ArrayList();
+            StringBuilder sb = queryMapper.mapQuery(list, params);
+            sb.insert(0, SELECT_QUERY).append(QUERY_ORDER_DATE);
+            newsList = getGenericQuery().loadQuery(sb.toString(), params.toArray(), 
                     connection, rowMapper);
         } catch (DaoSqlException | DaoConnectException ex) {
             throw new DaoException(ex);
@@ -58,19 +80,15 @@ public class JdbcNewsDao implements INewsDao{
         }
         return newsList;
     }
-    
+
     @Override
-    public News fetchById(Integer id) throws DaoException {
+    public void update(News news) throws DaoException {
         Connection connection = null;
-        News news = null;
         try {
             connection = getConnectionPool().getConnection();
-            Object[] params = new Object[]{id};
-            List<News> newsList = getGenericQuery().loadQuery(SELECT_BY_ID_QUERY, params, 
-                    connection, rowMapper);
-            if (newsList != null && !newsList.isEmpty()) {
-                news = newsList.get(0);
-            }
+            Object[] params = new Object[]{news.getTitle(), news.getDate(),
+                    news.getBrief(), news.getContent(), news.getId()};
+            getGenericQuery().updateQuery(UPDATE_QUERY, params, connection);
         } catch (DaoSqlException | DaoConnectException ex) {
             throw new DaoException(ex);
         } finally {
@@ -82,26 +100,18 @@ public class JdbcNewsDao implements INewsDao{
                 }
             }
         }
-        return news;
     }
-
+    
     @Override
-    public Integer save(News news) throws DaoException {
+    public Integer insert(News news) throws DaoException {
         Connection connection = null;
         Integer id = null;
         try {
             connection = getConnectionPool().getConnection();
-            if (news.getId() != null && news.getId() > 0) {
-                Object[] params = new Object[]{news.getTitle(), news.getDate(),
-                    news.getBrief(), news.getContent(), news.getId()};
-                getGenericQuery().updateQuery(UPDATE_QUERY, params, connection);
-                id = news.getId();
-            } else {
-                Object[] params = new Object[]{news.getTitle(), news.getDate(),
-                    news.getBrief(), news.getContent()};
-                id = getGenericQuery().saveQuery(INSERT_QUERY, DB_NEWS_ID,
-                        params, connection);
-            }         
+            Object[] params = new Object[]{news.getTitle(), news.getDate(),
+                news.getBrief(), news.getContent()};
+            id = getGenericQuery().saveQuery(INSERT_QUERY, DB_NEWS_ID,
+                    params, connection);
         } catch (DaoSqlException | DaoConnectException ex) {
             throw new DaoException(ex);
         } finally {
@@ -117,7 +127,7 @@ public class JdbcNewsDao implements INewsDao{
     }
 
     @Override
-    public void remove(List<Integer> idList) throws DaoException {
+    public void delete(List<Integer> idList) throws DaoException {
         Connection connection = null;
         try {
             connection = getConnectionPool().getConnection();

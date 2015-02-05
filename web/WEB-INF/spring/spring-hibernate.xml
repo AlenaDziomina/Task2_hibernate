@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="hibernateNewsDao" class="com.epam.testapp.database.dao.HibernateNewsDao"
+        singleton="true">
+        <property name="hibernateSession" ref="hibernateSession"></property>
+    </bean>
+    <bean id="hibernateSession" class="com.epam.testapp.util.hibernate.HibernateSession"
+          singleton="true" init-method="init">
+        <property name="hibernateCfgPath">
+            <value>/property/hibernate.cfg.xml</value>
+        </property>
+    </bean>
+
+</beans>
