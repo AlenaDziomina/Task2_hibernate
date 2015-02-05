@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 2, 2015 8:06:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.epam.testapp.model.News" table="NEWS" schema="ALENA" optimistic-lock="version">
+        <id name="id" type="integer">
+            <column name="NEWS_ID" precision="22" scale="0" />
+            <generator class="increment"/>
+        </id>
+        <property name="title" type="string">
+            <column name="TITLE" length="400" not-null="true" />
+        </property>
+        <property name="date" type="date">
+            <column name="NEWS_DATE" length="7" not-null="true" />
+        </property>
+        <property name="brief" type="string">
+            <column name="BRIEF" length="2000" not-null="true" />
+        </property>
+        <property name="content" type="string">
+            <column name="CONTENT" length="4000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
