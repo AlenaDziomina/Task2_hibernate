@@ -56,8 +56,8 @@ public class NewsAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
-        Integer id = Integer.decode(newsForm.getSelectedId());
-        News news = getNewsService().fetchById(id);
+        News news = new News(Integer.decode(newsForm.getSelectedId()));
+        news = getNewsService().fetchById(news);
         newsForm.setNewsMessage(news);
         if (news != null) {
             newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
@@ -75,8 +75,8 @@ public class NewsAction extends DispatchAction {
             HttpServletRequest request, HttpServletResponse responce)
             throws Exception {
         NewsForm newsForm = (NewsForm) form;
-        Integer id = Integer.decode(newsForm.getSelectedId());
-        News news = getNewsService().fetchById(id);
+        News news = new News(Integer.decode(newsForm.getSelectedId()));
+        news = getNewsService().fetchById(news);
         newsForm.setNewsMessage(news);
         if (news != null) {
             newsForm.setStringDate(DataConverter.toFormatString(news.getDate()));
@@ -95,11 +95,11 @@ public class NewsAction extends DispatchAction {
         NewsForm newsForm = (NewsForm) form;
         String[] deletedId = newsForm.getDeletedId();
         if (deletedId != null) {
-            List idList = new ArrayList();
+            List<News> newsList = new ArrayList();
             for(String strId : deletedId) {
-                idList.add(Integer.decode(strId));
+                newsList.add(new News(Integer.decode(strId)));
             }
-            getNewsService().remove(idList);
+            getNewsService().remove(newsList);
             newsForm.setNewsList(getNewsService().getList());
         } else {
             ActionErrors errors = new ActionErrors();

@@ -23,8 +23,10 @@ public class GenericQuery implements IGenericQuery {
         ResultSet rs = null;
         try {
             ps = conn.prepareStatement(query);
-            for (int i = 0; i < params.length; i++) {
-                ps.setObject(i + 1, params[i]);
+            if (params != null) {
+                for (int i = 0; i < params.length; i++) {
+                    ps.setObject(i + 1, params[i]);
+                }
             }
             rs = ps.executeQuery();
             int i = 0;

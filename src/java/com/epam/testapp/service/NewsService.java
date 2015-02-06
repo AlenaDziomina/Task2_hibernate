@@ -3,19 +3,13 @@ package com.epam.testapp.service;
 import com.epam.testapp.database.dao.INewsDao;
 import com.epam.testapp.database.exception.DaoException;
 import com.epam.testapp.model.News;
-import java.util.ArrayList;
 import java.util.List;
 
+//@Transactional
 public class NewsService implements INewsService {
-    
+    //@Autowired
     private INewsDao newsDao;
     
-    @Override
-    public List getList() throws DaoException {
-        List newsList = getNewsDao().select(null);
-        return newsList;
-    }
-
     @Override
     public Integer save(News news) throws DaoException {
         Integer id = news.getId();
@@ -26,23 +20,20 @@ public class NewsService implements INewsService {
         }
         return id;
     }
-
+    
     @Override
-    public void remove(List<Integer> idList) throws DaoException {
-        getNewsDao().delete(idList);
+    public void remove(List<News> news) throws DaoException {
+        getNewsDao().delete(news);
+    }
+    
+    @Override
+    public List getList() throws DaoException {
+        return getNewsDao().selectAll();
     }
 
     @Override
-    public News fetchById(Integer id) throws DaoException {
-        News news = new News();
-        news.setId(id);
-        List params = new ArrayList();
-        params.add(news);
-        List newsList = getNewsDao().select(params);
-        if (newsList != null && !newsList.isEmpty()) {
-            return (News) newsList.get(0);
-        }
-        return null;
+    public News fetchById(News news) throws DaoException {
+        return getNewsDao().fetchById(news);
     }
 
     /**

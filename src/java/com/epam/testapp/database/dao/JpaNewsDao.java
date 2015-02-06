@@ -2,7 +2,6 @@ package com.epam.testapp.database.dao;
 
 import com.epam.testapp.database.exception.DaoException;
 import com.epam.testapp.model.News;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,8 +12,7 @@ import org.apache.log4j.Logger;
 public class JpaNewsDao implements INewsDao {
     private static final Logger LOGGER = Logger.getLogger(JpaNewsDao.class);
     private EntityManagerFactory managerEntity;
-    private static final String DELETE_BY_ID = "DELETE FROM News where id = :id";
-    private static final String SELECT_ALL = "SELECT n FROM News n";
+    private static final String SELECT_ALL = "SELECT n FROM News n ORDER BY n.date DESC";
     
     public JpaNewsDao() {}
 
@@ -53,15 +51,14 @@ public class JpaNewsDao implements INewsDao {
     }
     
     @Override
-    public void delete(List<Integer> idList) throws DaoException {
+    public void delete(List<News> newsList) throws DaoException {
         EntityManager em = null;
         try {
             em = managerEntity.createEntityManager();
             em.getTransaction().begin();
-            for (Integer id : idList) {
-                Query query = em.createQuery(DELETE_BY_ID);
-                query.setParameter("id", id);
-                query.executeUpdate();
+            for (News news : newsList) {
+                news = em.find(News.class, news.getId());
+                em.remove(news);
             }
             em.getTransaction().commit();
         } catch (PersistenceException exc) {
@@ -73,23 +70,14 @@ public class JpaNewsDao implements INewsDao {
     }
     
     @Override
-    public List select(List<News> newsList) throws DaoException {
+    public List selectAll() throws DaoException {
         EntityManager em = null;
-        List<News> result = new ArrayList();
+        List<News> newsList;
         try {
             em = managerEntity.createEntityManager();
             em.getTransaction().begin();
-            if (newsList == null) {
-                em.getMetamodel().managedType(News.class);
-                Query query = em.createQuery(SELECT_ALL);
-                result = query.getResultList();
-            } else {
-                for (News news : newsList) {
-                    if (news.getId() != null) {
-                        result.add(news = em.find(News.class, news.getId()));
-                    }
-                }
-            }
+            Query query = em.createQuery(SELECT_ALL);
+            newsList = query.getResultList();
             em.getTransaction().commit();
         } catch (PersistenceException exc) {
             LOGGER.error(exc);
@@ -97,9 +85,26 @@ public class JpaNewsDao implements INewsDao {
         } finally {
             closeManager(em);
         }
-        return result;
+        return newsList;
     }
-    
+
+    @Override
+    public News fetchById(News news) throws DaoException {
+        EntityManager em = null;
+        try {
+            em = managerEntity.createEntityManager();
+            em.getTransaction().begin();
+            news = em.find(News.class, news.getId());
+            em.getTransaction().commit();
+        } catch (PersistenceException exc) {
+            LOGGER.error(exc);
+            throw new DaoException(exc);
+        } finally {
+            closeManager(em);
+        }
+        return news;
+    }
+        
     private void closeManager(EntityManager manager) {
         if ((manager != null) && manager.isOpen()) {
             try {
@@ -117,5 +122,8 @@ public class JpaNewsDao implements INewsDao {
     public void setManagerEntity(EntityManagerFactory managerEntity) {
             this.managerEntity = managerEntity;
     }
+
+    
+    
     
 }

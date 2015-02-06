@@ -28,23 +28,6 @@ public class HibernateNewsDao implements INewsDao {
             this.hibernateSession = hibernateSession;
     }
 
-    
-
-    @Override
-    public void update(News news) throws DaoException {
-        Session session = hibernateSession.getSession();
-        Transaction transaction;
-        try {
-            transaction = session.beginTransaction();
-            session.update(news);
-            transaction.commit();
-        } catch (HibernateException exc) {
-            LOGGER.error(exc);
-        } finally {
-            session.close();
-        }
-    }
-
     @Override
     public Integer insert(News news) throws DaoException {
         Session session = hibernateSession.getSession();
@@ -63,14 +46,31 @@ public class HibernateNewsDao implements INewsDao {
     }
 
     @Override
-    public void delete(List<Integer> idList) throws DaoException {
+    public void update(News news) throws DaoException {
+        Session session = hibernateSession.getSession();
+        Transaction transaction;
+        try {
+            transaction = session.beginTransaction();
+            session.update(news);
+            transaction.commit();
+        } catch (HibernateException exc) {
+            LOGGER.error(exc);
+        } finally {
+            session.close();
+        }
+    }
+
+    
+
+    @Override
+    public void delete(List<News> newsList) throws DaoException {
         Session session = hibernateSession.getSession();
         Transaction transaction;
         try {
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(News.class);
-            idList.stream().forEach((id) -> {
-                criteria.add(Restrictions.eq(NEWS_ID, id));
+            newsList.stream().forEach((news) -> {
+                criteria.add(Restrictions.eq(NEWS_ID, news.getId()));
             });
             List<News> list = (List<News>) criteria.list();
             list.stream().forEach((news) -> {
@@ -85,20 +85,15 @@ public class HibernateNewsDao implements INewsDao {
     }
 
     @Override
-    public List select(List<News> newsList) throws DaoException {
+    public List selectAll() throws DaoException {
         Session session = hibernateSession.getSession();
         Transaction transaction;
-        List<News> list = null;
+        List<News> newsList = null;
         try {
             transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(News.class);
             criteria.addOrder(Order.desc(NEWS_DATE));
-            if (newsList != null) {
-                newsList.stream().filter((news) -> (news.getId() != null)).forEach((news) -> {
-                    criteria.add(Restrictions.eq(NEWS_ID, news.getId()));
-                });
-            }
-            list = (List<News>) criteria.list();
+            newsList = (List<News>) criteria.list();
             transaction.commit();
         } catch (HibernateException exc) {
             LOGGER.error(exc);
@@ -106,7 +101,24 @@ public class HibernateNewsDao implements INewsDao {
         } finally {
             session.close();
         }
-        return list;
+        return newsList;
+    }
+ 
+    @Override
+    public News fetchById(News news) throws DaoException {
+        Session session = hibernateSession.getSession();
+        Transaction transaction;
+        try {
+            transaction = session.beginTransaction();
+            news = (News) session.get(News.class, news.getId());
+            transaction.commit();
+        } catch (HibernateException exc) {
+            LOGGER.error(exc);
+            throw new DaoException(exc);
+        } finally {
+            session.close();
+        }
+        return news;
     }
 }
 
