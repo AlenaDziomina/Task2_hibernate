@@ -2,6 +2,7 @@ package com.epam.testapp.database.dao;
 
 import com.epam.testapp.database.exception.DaoException;
 import com.epam.testapp.model.News;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,7 +13,6 @@ import org.apache.log4j.Logger;
 public class JpaNewsDao implements INewsDao {
     private static final Logger LOGGER = Logger.getLogger(JpaNewsDao.class);
     private EntityManagerFactory managerEntity;
-    private static final String SELECT_ALL = "SELECT n FROM News n ORDER BY n.date DESC";
     
     public JpaNewsDao() {}
 
@@ -54,13 +54,23 @@ public class JpaNewsDao implements INewsDao {
     public void delete(List<News> newsList) throws DaoException {
         EntityManager em = null;
         try {
+            List<Integer> ids = new ArrayList<>();
+            newsList.stream().forEach((news) -> {
+                ids.add(news.getId());
+            });
+            
             em = managerEntity.createEntityManager();
             em.getTransaction().begin();
-            for (News news : newsList) {
-                news = em.find(News.class, news.getId());
-                em.remove(news);
-            }
+            Query query = em.createNamedQuery("Delete");
+            query.setParameter("id", ids);
+            query.executeUpdate();
             em.getTransaction().commit();
+            
+//            for (News news : newsList) {
+//                news = em.find(News.class, news.getId());
+//                em.remove(news);
+//            }
+            
         } catch (PersistenceException exc) {
             LOGGER.error(exc);
             throw new DaoException(exc);
@@ -77,7 +87,6 @@ public class JpaNewsDao implements INewsDao {
             em = managerEntity.createEntityManager();
             em.getTransaction().begin();
             Query query = em.createNamedQuery("Select");
-            //Query query = em.createQuery(SELECT_ALL);
             newsList = query.getResultList();
             em.getTransaction().commit();
         } catch (PersistenceException exc) {

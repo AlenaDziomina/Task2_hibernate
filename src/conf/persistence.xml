@@ -6,6 +6,7 @@
     <validation-mode>NONE</validation-mode>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
       <property name="javax.persistence.jdbc.user" value="alena"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>

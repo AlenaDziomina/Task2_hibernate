@@ -5,21 +5,20 @@ import java.sql.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "NEWS")
 @NamedQueries({
-		@NamedQuery(name = "Delete", query = "DELETE FROM News n where n.id = :ID"),
+		@NamedQuery(name = "Delete", query = "DELETE FROM News n where n.id in (:id)"),
 		@NamedQuery(name = "Select", query = "SELECT n FROM News n ORDER BY n.date DESC") })
 public class News implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id  @GeneratedValue
     @Basic(optional = false)
     @Column(name = "NEWS_ID")
     private Integer id;
@@ -28,7 +27,6 @@ public class News implements Serializable {
     private String title;
     @Basic(optional = false)
     @Column(name = "NEWS_DATE")
-    @Temporal(TemporalType.DATE)
     private Date date;
     @Basic(optional = false)
     @Column(name = "BRIEF")
