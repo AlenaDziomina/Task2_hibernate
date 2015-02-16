@@ -5,12 +5,18 @@
 
 <a class="constColor grey" href="index.do"><bean:message key="menu.header"/></a>
 <a class="constColor grey"> >> </a>
-<bean:message key="menu.label.add"/>
+
 
 <logic:notPresent  name="newsForm" property="newsMessage">
     <div class="errors"><html:errors/></div>
 </logic:notPresent>
 <logic:present  name="newsForm" property="newsMessage">
+    <logic:present  name="newsForm" property="newsMessage.id">
+        <bean:message key="menu.label.edit"/>
+    </logic:present>
+    <logic:notPresent  name="newsForm" property="newsMessage.id">
+        <bean:message key="menu.label.add"/>
+    </logic:notPresent>
     <table class="newstable">
         <html:form action="/newsaction?action=save" onsubmit="return validateNewsForm(this)">
             <jsp:include page="/WEB-INF/jsp/validationMsg.jsp" />           

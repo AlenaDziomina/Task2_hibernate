@@ -7,16 +7,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 public class HibernateNewsDao implements INewsDao {
     private static final Logger LOGGER = Logger.getLogger(HibernateNewsDao.class);
     private HibernateSession hibernateSession;
     private static final String NEWS_ID = "id";
     private static final String NEWS_DATE = "date";
+    public static final String DELETE_NEWS_QUERY = "Delete News where id in (:id)";
+
 
     public HibernateNewsDao() {}
 
@@ -39,6 +41,7 @@ public class HibernateNewsDao implements INewsDao {
             transaction.commit();
         } catch (HibernateException exc) {
             LOGGER.error(exc);
+            throw new DaoException(exc);
         } finally {
             session.close();
         }
@@ -55,6 +58,7 @@ public class HibernateNewsDao implements INewsDao {
             transaction.commit();
         } catch (HibernateException exc) {
             LOGGER.error(exc);
+            throw new DaoException(exc);
         } finally {
             session.close();
         }
@@ -67,18 +71,28 @@ public class HibernateNewsDao implements INewsDao {
         Session session = hibernateSession.getSession();
         Transaction transaction;
         try {
+            
+            Object[] ids = new Object[newsList.size()];
+            int i = 0;
+            for (News news : newsList) {
+                ids[i++] = news.getId();
+            }
             transaction = session.beginTransaction();
-            Criteria criteria = session.createCriteria(News.class);
-            newsList.stream().forEach((news) -> {
-                criteria.add(Restrictions.eq(NEWS_ID, news.getId()));
-            });
-            List<News> list = (List<News>) criteria.list();
-            list.stream().forEach((news) -> {
-                session.delete(news);
-            });
+            Query query = session.createQuery(DELETE_NEWS_QUERY);
+            query.setParameterList(NEWS_ID, ids);
+            query.executeUpdate();
+//            Criteria criteria = session.createCriteria(News.class);
+//            newsList.stream().forEach((news) -> {
+//                criteria.add(Restrictions.eq(NEWS_ID, news.getId()));
+//            });
+//            List<News> list = (List<News>) criteria.list();
+//            list.stream().forEach((news) -> {
+//                session.delete(news);
+//            });
             transaction.commit();
         } catch (HibernateException exc) {
             LOGGER.error(exc);
+            throw new DaoException(exc);
         } finally {
             session.close();
         }

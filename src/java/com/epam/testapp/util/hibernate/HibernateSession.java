@@ -1,12 +1,10 @@
 package com.epam.testapp.util.hibernate;
 
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateSession {
     private static final Logger LOGGER = Logger.getLogger(HibernateSession.class);
@@ -17,11 +15,9 @@ public class HibernateSession {
     
     public void init() throws ExceptionInInitializerError{
         try {
-            ServiceRegistry serviceRegistry;
             Configuration configuration = new Configuration().configure(hibernateCfgPath);
-            Properties properties = configuration.getProperties();
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(properties).build();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            sessionFactory = configuration.buildSessionFactory(ssrb.build());
         } catch (Throwable ex) {
             LOGGER.error(ex);
             throw new ExceptionInInitializerError(ex);

@@ -11,13 +11,13 @@
     
     <bean id="newsService" class="com.epam.testapp.service.NewsService"
           singleton="true">
-        <property name="newsDao" ref="hibernateNewsDao"></property>
+        <property name="newsDao" ref="jpaNewsDao"></property>
     </bean>
     
     
-    <import resource="spring/spring-jdbc.xml" />
-    
-    <import resource="spring/spring-hibernate.xml" />
+    <!--import resource="spring/spring-jdbc.xml" />-->
+    <import resource="spring/spring-jpa.xml" />
+    <!--<import resource="spring/spring-hibernate.xml" />-->
     
     
     

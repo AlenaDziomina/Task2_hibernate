@@ -76,7 +76,8 @@ public class JpaNewsDao implements INewsDao {
         try {
             em = managerEntity.createEntityManager();
             em.getTransaction().begin();
-            Query query = em.createQuery(SELECT_ALL);
+            Query query = em.createNamedQuery("Select");
+            //Query query = em.createQuery(SELECT_ALL);
             newsList = query.getResultList();
             em.getTransaction().commit();
         } catch (PersistenceException exc) {
