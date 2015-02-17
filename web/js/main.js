@@ -14,12 +14,12 @@ function confirmSubmit(boxName){
 }
 
 function errorMessage(){
-    alert(errorMsg);
+    alert(errMessage);
     return false;
 }
 
 function confirmation(){
-    var agree=confirm(confirmMsg);
+    var agree=confirm(confirmMessage);
     if(agree) {
         return true;
     } else {

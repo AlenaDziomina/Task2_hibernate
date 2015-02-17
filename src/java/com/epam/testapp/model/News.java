@@ -2,13 +2,14 @@ package com.epam.testapp.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,21 +18,16 @@ import javax.persistence.Table;
 		@NamedQuery(name = "Delete", query = "DELETE FROM News n where n.id in (:id)"),
 		@NamedQuery(name = "Select", query = "SELECT n FROM News n ORDER BY n.date DESC") })
 public class News implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id  @GeneratedValue
-    @Basic(optional = false)
+    @Id  
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "NEWS_ID")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "TITLE")
     private String title;
-    @Basic(optional = false)
     @Column(name = "NEWS_DATE")
     private Date date;
-    @Basic(optional = false)
     @Column(name = "BRIEF")
     private String brief;
-    @Basic(optional = false)
     @Column(name = "CONTENT")
     private String content;
 
@@ -41,7 +37,7 @@ public class News implements Serializable {
     public News(Integer newsId) {
         this.id = newsId;
     }
-
+    
     public News(Integer id, String title, Date date, String brief, String content) {
         this.id = id;
         this.title = title;

@@ -11,6 +11,7 @@
 </script> 
 <html:form action="/newsaction?action=delete" 
            onsubmit="return confirmSubmit('deletedId')">
+    <jsp:include page="/WEB-INF/jsp/validationMsg.jsp" />
     <logic:notEmpty  name="newsForm" property="newsList">
         <table cellpadding="8" class="newstable">
             <logic:iterate id="iter" name="newsForm" property="newsList" indexId="newsIndex">
@@ -54,5 +55,4 @@
     </logic:empty>
         
 </html:form>
-<html:javascript formName="newsForm" staticJavascript="true"/>
 
