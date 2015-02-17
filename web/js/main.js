@@ -9,7 +9,8 @@ function confirmSubmit(boxName){
     if (flag) {
         return confirmation();
     } else {
-        return errorMessage();
+        errorMessage();
+        return false;
     }
 }
 

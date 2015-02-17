@@ -5,7 +5,6 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,7 +18,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = "Select", query = "SELECT n FROM News n ORDER BY n.date DESC") })
 public class News implements Serializable {
     @Id  
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "NEWS_ID", sequenceName = "NEWS_SEQ")
+    @GeneratedValue(generator = "NEWS_ID")
     @Column(name = "NEWS_ID")
     private Integer id;
     @Column(name = "TITLE")
