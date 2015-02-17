@@ -9,17 +9,18 @@ function confirmSubmit(boxName){
     if (flag) {
         return confirmation();
     } else {
-        return errorMessage();
+        errorAllert();
+        return false;
     }
 }
 
-function errorMessage(){
-    alert(errorMsg);
+function errorAllert(){
+    alert(errMessage);
     return false;
 }
 
 function confirmation(){
-    var agree=confirm(confirmMsg);
+    var agree=confirm(confirmMessage);
     if(agree) {
         return true;
     } else {

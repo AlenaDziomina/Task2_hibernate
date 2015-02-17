@@ -128,6 +128,7 @@ public class NewsAction extends DispatchAction {
         }
         newsForm.getNewsMessage().setDate(DataConverter.toSqlDate(newsForm.getStringDate()));
         newsForm.getNewsMessage().setId(getNewsService().save(newsForm.getNewsMessage()));
+        newsForm.setNewsList(getNewsService().getList());
         newsForm.setForwardName(FORWARD_NEWSVIEW);
         return mapping.findForward(FORWARD_NEWSVIEW);
     }
